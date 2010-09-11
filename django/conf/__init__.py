@@ -11,6 +11,7 @@ import re
 import time     # Needed for Windows
 
 from django.conf import global_settings
+from django.core import bootstrap
 from django.utils.functional import LazyObject
 from django.utils import importlib
 
@@ -22,6 +23,12 @@ class LazySettings(LazyObject):
     The user can manually configure settings prior to using them. Otherwise,
     Django uses the settings module pointed to by DJANGO_SETTINGS_MODULE.
     """
+
+    def __getattr__(self, name):
+        value = super(LazySettings, self).__getattr__(name)
+        bootstrap.bootstrap()
+        return value
+
     def _setup(self):
         """
         Load the settings module pointed to by the environment variable. This
