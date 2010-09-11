@@ -46,7 +46,7 @@ def register(fn, *args, **kwargs):
 
     if not __BOOTSTRAP_COMPLETE or allow_late_registration:
         REGISTRY.append(reg_fn)
-        if allow_late_registration:
+        if allow_late_registration and __BOOTSTRAP_COMPLETE:
             reg_fn()
     else:
         raise BootstrapRan("Cannot register new bootstrap method; bootstrap has already run.")
