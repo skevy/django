@@ -431,6 +431,11 @@ CACHE_BACKEND = 'locmem://'
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
 CACHE_MIDDLEWARE_SECONDS = 600
 
+#############
+# BOOTSTRAP #
+#############
+BOOTSTRAP_FUNCTION = 'django.core.bootstrap.autodiscover'
+
 ####################
 # COMMENTS         #
 ####################
