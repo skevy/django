@@ -6,6 +6,7 @@ be executed through ``django-admin.py`` or ``manage.py``).
 
 import os
 import sys
+import traceback
 from optparse import make_option, OptionParser
 
 import django
@@ -210,7 +211,7 @@ class BaseCommand(object):
             except ImportError, e:
                 # If settings should be available, but aren't,
                 # raise the error and quit.
-                sys.stderr.write(smart_str(self.style.ERROR('Error: %s\n' % e)))
+                sys.stderr.write(smart_str(self.style.ERROR(traceback.format_exc())))
                 sys.exit(1)
         try:
             self.stdout = options.get('stdout', sys.stdout)
@@ -230,7 +231,7 @@ class BaseCommand(object):
                 if self.output_transaction:
                     self.stdout.write(self.style.SQL_KEYWORD("COMMIT;") + '\n')
         except CommandError, e:
-            self.stderr.write(smart_str(self.style.ERROR('Error: %s\n' % e)))
+            self.stderr.write(smart_str(self.style.ERROR(traceback.format_exc())))
             sys.exit(1)
 
     def validate(self, app=None, display_num_errors=False):
