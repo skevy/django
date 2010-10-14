@@ -79,7 +79,8 @@ def bootstrap():
         try:
             func()
         except Exception, e:
-            raise ImproperlyConfigured("Unable to run bootstrap process. (%s)" % format_exception(e))
+            import traceback
+            raise ImproperlyConfigured("Unable to run bootstrap process. (%s)" % traceback.format_exc())
 
         for i, fn in enumerate(REGISTRY):
             try:
