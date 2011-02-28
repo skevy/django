@@ -46,9 +46,15 @@ commonly used groups of widgets:
 
     File upload input: ``<input type='file' ...>``
 
-.. class:: DateInput
+.. class:: ClearableFileInput
 
-    .. versionadded:: 1.1
+    .. versionadded:: 1.3
+
+    File upload input: ``<input type='file' ...>``, with an additional checkbox
+    input to clear the field's value, if the field is not required and has
+    initial data.
+
+.. class:: DateInput
 
     Date input as a simple text box: ``<input type='text' ...>``
 
@@ -61,8 +67,6 @@ commonly used groups of widgets:
     If no ``format`` argument is provided, the default format is ``'%Y-%m-%d'``.
 
 .. class:: DateTimeInput
-
-    .. versionadded:: 1.0
 
     Date/time input as a simple text box: ``<input type='text' ...>``
 
@@ -86,9 +90,6 @@ commonly used groups of widgets:
         The format in which this field's initial value will be displayed.
 
     If no ``format`` argument is provided, the default format is ``'%H:%M:%S'``.
-
-    .. versionchanged:: 1.1
-       The ``format`` argument was not supported in Django 1.0.
 
 .. class:: Textarea
 
@@ -159,13 +160,19 @@ commonly used groups of widgets:
     Takes two optional arguments, ``date_format`` and ``time_format``, which
     work just like the ``format`` argument for ``DateInput`` and ``TimeInput``.
 
-    .. versionchanged:: 1.1
-       The ``date_format`` and ``time_format`` arguments were not supported in Django 1.0.
+.. currentmodule:: django.forms.extras.widgets
 
 .. class:: SelectDateWidget
 
     Wrapper around three select widgets: one each for month, day, and year.
     Note that this widget lives in a separate file from the standard widgets.
+
+    Takes one optional argument:
+
+    .. attribute:: List.years
+
+        An optional list/tuple of years to use in the "year" select box.
+        The default is a list containing the current year and the next 9 years.
 
     .. code-block:: python
 
@@ -175,6 +182,7 @@ commonly used groups of widgets:
 
 Specifying widgets
 ------------------
+.. currentmodule:: django.forms
 
 .. attribute:: Form.widget
 
@@ -202,7 +210,7 @@ Customizing widget instances
 When Django renders a widget as HTML, it only renders the bare minimum
 HTML - Django doesn't add a class definition, or any other widget-specific
 attributes. This means that all 'TextInput' widgets will appear the same
-on your web page.
+on your Web page.
 
 If you want to make one widget look different to another, you need to
 specify additional attributes for each widget. When you specify a
@@ -227,7 +235,7 @@ each widget will be rendered exactly the same::
     <tr><th>Comment:</th><td><input type="text" name="comment" /></td></tr>
 
 
-On a real web page, you probably don't want every widget to look the same. You
+On a real Web page, you probably don't want every widget to look the same. You
 might want a larger input element for the comment, and you might want the 'name'
 widget to have some special CSS class. To do this, you use the ``attrs``
 argument when creating the widget:

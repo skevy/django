@@ -21,7 +21,7 @@ the details about how to use mod_wsgi. You'll probably want to start with the
 .. _official mod_wsgi documentation: http://code.google.com/p/modwsgi/
 .. _installation and configuration documentation: http://code.google.com/p/modwsgi/wiki/InstallationInstructions
 
-Basic Configuration
+Basic configuration
 ===================
 
 Once you've got mod_wsgi installed and activated, edit your ``httpd.conf`` file
@@ -47,10 +47,12 @@ mentioned in the second part of ``WSGIScriptAlias`` and add::
 
 If your project is not on your ``PYTHONPATH`` by default you can add::
 
-    sys.path.append('/usr/local/django')
+    path = '/path/to/mysite'
+    if path not in sys.path:
+        sys.path.append(path)
 
-just above the final ``import`` line to place your project on the path. Remember to
-replace 'mysite.settings' with your correct settings file, and '/usr/local/django'
+just below the ``import sys`` line to place your project on the path. Remember to
+replace 'mysite.settings' with your correct settings file, and '/path/to/mysite'
 with your own project's location.
 
 .. _serving-media-files:
@@ -81,7 +83,7 @@ file. All other URLs will be served using mod_wsgi::
     Alias /robots.txt /usr/local/wsgi/static/robots.txt
     Alias /favicon.ico /usr/local/wsgi/static/favicon.ico
 
-    AliasMatch /([^/]*\.css) /usr/local/wsgi/static/styles/$1
+    AliasMatch ^/([^/]*\.css) /usr/local/wsgi/static/styles/$1
 
     Alias /media/ /usr/local/wsgi/static/media/
 

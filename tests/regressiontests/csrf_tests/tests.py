@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+import warnings
 
 from django.test import TestCase
 from django.http import HttpRequest, HttpResponse
 from django.middleware.csrf import CsrfMiddleware, CsrfViewMiddleware
-from django.views.decorators.csrf import csrf_exempt, csrf_view_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_view_exempt, requires_csrf_token
 from django.core.context_processors import csrf
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.utils.importlib import import_module
@@ -68,6 +69,14 @@ class CsrfMiddlewareTest(TestCase):
     _session_token = "5a105e8b9d40e1329780d62ea2265d8a"
     _session_id = "1"
     _secret_key_for_session_test= "test"
+
+    def setUp(self):
+        self.save_warnings_state()
+        warnings.filterwarnings('ignore', category=DeprecationWarning,
+                                module='django.middleware.csrf')
+
+    def tearDown(self):
+        self.restore_warnings_state()
 
     def _get_GET_no_csrf_cookie_request(self):
         return TestingHttpRequest()
@@ -275,12 +284,12 @@ class CsrfMiddlewareTest(TestCase):
         req2 = CsrfMiddleware().process_view(req, csrf_exempt(post_form_view), (), {})
         self.assertEquals(None, req2)
 
-    def test_ajax_exemption(self):
+    def test_csrf_token_in_header(self):
         """
-        Check that AJAX requests are automatically exempted.
+        Check that we can pass in the token in a header instead of in the form
         """
         req = self._get_POST_csrf_cookie_request()
-        req.META['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+        req.META['HTTP_X_CSRFTOKEN'] = self._csrf_id
         req2 = CsrfMiddleware().process_view(req, post_form_view, (), {})
         self.assertEquals(None, req2)
 
@@ -320,6 +329,14 @@ class CsrfMiddlewareTest(TestCase):
         req = self._get_GET_csrf_cookie_request()
         CsrfViewMiddleware().process_view(req, csrf_view_exempt(token_view), (), {})
         resp = token_view(req)
+        self._check_token_present(resp)
+
+    def test_get_token_for_requires_csrf_token_view(self):
+        """
+        Check that get_token works for a view decorated solely with requires_csrf_token
+        """
+        req = self._get_GET_csrf_cookie_request()
+        resp = requires_csrf_token(token_view)(req)
         self._check_token_present(resp)
 
     def test_token_node_with_new_csrf_cookie(self):

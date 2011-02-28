@@ -226,10 +226,10 @@ class BaseCommand(object):
                     from django.db import connections, DEFAULT_DB_ALIAS
                     connection = connections[options.get('database', DEFAULT_DB_ALIAS)]
                     if connection.ops.start_transaction_sql():
-                        self.stdout.write(self.style.SQL_KEYWORD(connection.ops.start_transaction_sql()))
+                        self.stdout.write(self.style.SQL_KEYWORD(connection.ops.start_transaction_sql()) + '\n')
                 self.stdout.write(output)
                 if self.output_transaction:
-                    self.stdout.write(self.style.SQL_KEYWORD("COMMIT;") + '\n')
+                    self.stdout.write('\n' + self.style.SQL_KEYWORD("COMMIT;") + '\n')
         except CommandError, e:
             self.stderr.write(smart_str(self.style.ERROR(traceback.format_exc())))
             sys.exit(1)

@@ -1,19 +1,20 @@
 #! -*- coding: utf-8 -*-
-import os
 import errno
+import os
 import shutil
-import unittest
 from StringIO import StringIO
 
 from django.core.files import temp as tempfile
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.http.multipartparser import MultiPartParser
 from django.test import TestCase, client
 from django.utils import simplejson
+from django.utils import unittest
 from django.utils.hashcompat import sha_constructor
-from django.http.multipartparser import MultiPartParser
 
 from models import FileModel, temp_storage, UPLOAD_TO
 import uploadhandler
+
 
 UNICODE_FILENAME = u'test-0123456789_中文_Orléans.jpg'
 
@@ -223,7 +224,7 @@ class FileUploadTests(TestCase):
                 ret = super(POSTAccessingHandler, self).handle_uncaught_exception(request, resolver, exc_info)
                 p = request.POST
                 return ret
-        
+
         post_data = {
             'name': 'Ringo',
             'file_field': open(__file__),
@@ -244,7 +245,7 @@ class FileUploadTests(TestCase):
             response = self.client.post('/file_uploads/upload_errors/', post_data)
         except reference_error.__class__, err:
             self.failIf(
-                str(err) == str(reference_error), 
+                str(err) == str(reference_error),
                 "Caught a repeated exception that'll cause an infinite loop in file uploads."
             )
         except Exception, err:

@@ -6,7 +6,6 @@ from django.contrib.admin.views.main import ALL_VAR, EMPTY_CHANGELIST_VALUE
 from django.contrib.admin.views.main import ORDER_VAR, ORDER_TYPE_VAR, PAGE_VAR, SEARCH_VAR
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.forms.forms import pretty_name
 from django.utils import formats
 from django.utils.html import escape, conditional_escape
 from django.utils.safestring import mark_safe
@@ -140,6 +139,8 @@ def items_for_result(cl, result, form):
             result_repr = EMPTY_CHANGELIST_VALUE
         else:
             if f is None:
+                if field_name == u'action_checkbox':
+                    row_class = ' class="action-checkbox"'
                 allow_tags = getattr(attr, 'allow_tags', False)
                 boolean = getattr(attr, 'boolean', False)
                 if boolean:
@@ -154,13 +155,17 @@ def items_for_result(cl, result, form):
                 else:
                     result_repr = mark_safe(result_repr)
             else:
-                if value is None:
-                    result_repr = EMPTY_CHANGELIST_VALUE
                 if isinstance(f.rel, models.ManyToOneRel):
-                    result_repr = escape(getattr(result, f.name))
+                    field_val = getattr(result, f.name)
+                    if field_val is None:
+                        result_repr = EMPTY_CHANGELIST_VALUE
+                    else:
+                        result_repr = escape(field_val)
                 else:
                     result_repr = display_for_field(value, f)
-                if isinstance(f, models.DateField) or isinstance(f, models.TimeField):
+                if isinstance(f, models.DateField)\
+                or isinstance(f, models.TimeField)\
+                or isinstance(f, models.ForeignKey):
                     row_class = ' class="nowrap"'
         if force_unicode(result_repr) == '':
             result_repr = mark_safe('&nbsp;')
@@ -192,13 +197,22 @@ def items_for_result(cl, result, form):
     if form and not form[cl.model._meta.pk.name].is_hidden:
         yield mark_safe(u'<td>%s</td>' % force_unicode(form[cl.model._meta.pk.name]))
 
+class ResultList(list):
+    # Wrapper class used to return items in a list_editable
+    # changelist, annotated with the form object for error
+    # reporting purposes. Needed to maintain backwards
+    # compatibility with existing admin templates.
+    def __init__(self, form, *items):
+        self.form = form
+        super(ResultList, self).__init__(*items)
+
 def results(cl):
     if cl.formset:
         for res, form in zip(cl.result_list, cl.formset.forms):
-            yield list(items_for_result(cl, res, form))
+            yield ResultList(form, items_for_result(cl, res, form))
     else:
         for res in cl.result_list:
-            yield list(items_for_result(cl, res, None))
+            yield ResultList(None, items_for_result(cl, res, None))
 
 def result_hidden_fields(cl):
     if cl.formset:
@@ -232,6 +246,16 @@ def date_hierarchy(cl):
 
         link = lambda d: cl.get_query_string(d, [field_generic])
 
+        if not (year_lookup or month_lookup or day_lookup):
+            # select appropriate start level
+            date_range = cl.query_set.aggregate(first=models.Min(field_name),
+                                                last=models.Max(field_name))
+            if date_range['first'] and date_range['last']:
+                if date_range['first'].year == date_range['last'].year:
+                    year_lookup = date_range['first'].year
+                    if date_range['first'].month == date_range['last'].month:
+                        month_lookup = date_range['first'].month
+
         if year_lookup and month_lookup and day_lookup:
             day = datetime.date(int(year_lookup), int(month_lookup), int(day_lookup))
             return {
@@ -248,7 +272,7 @@ def date_hierarchy(cl):
                 'show': True,
                 'back': {
                     'link': link({year_field: year_lookup}),
-                    'title': year_lookup
+                    'title': str(year_lookup)
                 },
                 'choices': [{
                     'link': link({year_field: year_lookup, month_field: month_lookup, day_field: day.day}),

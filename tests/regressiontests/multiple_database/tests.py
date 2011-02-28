@@ -581,6 +581,12 @@ class QueryTestCase(TestCase):
         self.assertEquals(Person.objects.using('other').count(), 0)
         self.assertEquals(Pet.objects.using('other').count(), 0)
 
+    def test_foreign_key_validation(self):
+        "ForeignKey.validate() uses the correct database"
+        mickey = Person.objects.using('other').create(name="Mickey")
+        pluto = Pet.objects.using('other').create(name="Pluto", owner=mickey)
+        self.assertEquals(None, pluto.full_clean())
+
     def test_o2o_separation(self):
         "OneToOne fields are constrained to a single database"
         # Create a user and profile on the default database
@@ -853,10 +859,10 @@ class QueryTestCase(TestCase):
         "test the raw() method across databases"
         dive = Book.objects.using('other').create(title="Dive into Python",
             published=datetime.date(2009, 5, 4))
-        val = Book.objects.db_manager("other").raw('SELECT id FROM "multiple_database_book"')
+        val = Book.objects.db_manager("other").raw('SELECT id FROM multiple_database_book')
         self.assertEqual(map(lambda o: o.pk, val), [dive.pk])
 
-        val = Book.objects.raw('SELECT id FROM "multiple_database_book"').using('other')
+        val = Book.objects.raw('SELECT id FROM multiple_database_book').using('other')
         self.assertEqual(map(lambda o: o.pk, val), [dive.pk])
 
     def test_select_related(self):
@@ -891,6 +897,28 @@ class QueryTestCase(TestCase):
         except ValueError:
             pass
 
+    def test_related_manager(self):
+        "Related managers return managers, not querysets"
+        mark = Person.objects.using('other').create(name="Mark Pilgrim")
+
+        # extra_arg is removed by the BookManager's implementation of
+        # create(); but the BookManager's implementation won't get called
+        # unless edited returns a Manager, not a queryset
+        mark.book_set.create(title="Dive into Python",
+                             published=datetime.date(2009, 5, 4),
+                             extra_arg=True)
+
+        mark.book_set.get_or_create(title="Dive into Python",
+                                    published=datetime.date(2009, 5, 4),
+                                    extra_arg=True)
+
+        mark.edited.create(title="Dive into Water",
+                           published=datetime.date(2009, 5, 4),
+                           extra_arg=True)
+
+        mark.edited.get_or_create(title="Dive into Water",
+                                  published=datetime.date(2009, 5, 4),
+                                  extra_arg=True)
 
 class TestRouter(object):
     # A test router. The behaviour is vaguely master/slave, but the
@@ -1548,13 +1576,17 @@ class AuthTestCase(TestCase):
         command_output = new_io.getvalue().strip()
         self.assertTrue('"email": "alice@example.com",' in command_output)
 
+_missing = object()
 class UserProfileTestCase(TestCase):
     def setUp(self):
-        self.old_auth_profile_module = getattr(settings, 'AUTH_PROFILE_MODULE', None)
+        self.old_auth_profile_module = getattr(settings, 'AUTH_PROFILE_MODULE', _missing)
         settings.AUTH_PROFILE_MODULE = 'multiple_database.UserProfile'
 
     def tearDown(self):
-        settings.AUTH_PROFILE_MODULE = self.old_auth_profile_module
+        if self.old_auth_profile_module is _missing:
+            del settings.AUTH_PROFILE_MODULE
+        else:
+            settings.AUTH_PROFILE_MODULE = self.old_auth_profile_module
 
     def test_user_profiles(self):
 
@@ -1759,3 +1791,94 @@ class SignalTests(TestCase):
         b.authors.clear()
         self._write_to_default()
         self.assertEqual(receiver._database, "other")
+
+class AttributeErrorRouter(object):
+    "A router to test the exception handling of ConnectionRouter"
+    def db_for_read(self, model, **hints):
+        raise AttributeError
+
+    def db_for_write(self, model, **hints):
+        raise AttributeError
+
+class RouterAttributeErrorTestCase(TestCase):
+    multi_db = True
+
+    def setUp(self):
+        self.old_routers = router.routers
+        router.routers = [AttributeErrorRouter()]
+
+    def tearDown(self):
+        router.routers = self.old_routers
+
+    def test_attribute_error_read(self):
+        "Check that the AttributeError from AttributeErrorRouter bubbles up"
+        router.routers = [] # Reset routers so we can save a Book instance
+        b = Book.objects.create(title="Pro Django",
+                                published=datetime.date(2008, 12, 16))
+        router.routers = [AttributeErrorRouter()] # Install our router
+        self.assertRaises(AttributeError, Book.objects.get, pk=b.pk)
+
+    def test_attribute_error_save(self):
+        "Check that the AttributeError from AttributeErrorRouter bubbles up"
+        dive = Book()
+        dive.title="Dive into Python"
+        dive.published = datetime.date(2009, 5, 4)
+        self.assertRaises(AttributeError, dive.save)
+
+    def test_attribute_error_delete(self):
+        "Check that the AttributeError from AttributeErrorRouter bubbles up"
+        router.routers = [] # Reset routers so we can save our Book, Person instances
+        b = Book.objects.create(title="Pro Django",
+                                published=datetime.date(2008, 12, 16))
+        p = Person.objects.create(name="Marty Alchin")
+        b.authors = [p]
+        b.editor = p
+        router.routers = [AttributeErrorRouter()] # Install our router
+        self.assertRaises(AttributeError, b.delete)
+
+    def test_attribute_error_m2m(self):
+        "Check that the AttributeError from AttributeErrorRouter bubbles up"
+        router.routers = [] # Reset routers so we can save our Book, Person instances
+        b = Book.objects.create(title="Pro Django",
+                                published=datetime.date(2008, 12, 16))
+        p = Person.objects.create(name="Marty Alchin")
+        router.routers = [AttributeErrorRouter()] # Install our router
+        self.assertRaises(AttributeError, setattr, b, 'authors', [p])
+
+class ModelMetaRouter(object):
+    "A router to ensure model arguments are real model classes"
+    def db_for_write(self, model, **hints):
+        if not hasattr(model, '_meta'):
+            raise ValueError
+
+class RouterModelArgumentTestCase(TestCase):
+    multi_db = True
+
+    def setUp(self):
+        self.old_routers = router.routers
+        router.routers = [ModelMetaRouter()]
+
+    def tearDown(self):
+        router.routers = self.old_routers
+
+    def test_m2m_collection(self):
+        b = Book.objects.create(title="Pro Django",
+                                published=datetime.date(2008, 12, 16))
+
+        p = Person.objects.create(name="Marty Alchin")
+        # test add
+        b.authors.add(p)
+        # test remove
+        b.authors.remove(p)
+        # test clear
+        b.authors.clear()
+        # test setattr
+        b.authors = [p]
+        # test M2M collection
+        b.delete()
+
+    def test_foreignkey_collection(self):
+        person = Person.objects.create(name='Bob')
+        pet = Pet.objects.create(owner=person, name='Wart')
+        # test related FK collection
+        person.delete()

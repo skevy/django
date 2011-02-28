@@ -1,8 +1,7 @@
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
-from django.conf import settings
 from django.db import models
-from django.db import connection, DEFAULT_DB_ALIAS
+from django.db import connection
 
 
 class Square(models.Model):
@@ -28,7 +27,7 @@ class SchoolClass(models.Model):
 
 # Unfortunately, the following model breaks MySQL hard.
 # Until #13711 is fixed, this test can't be run under MySQL.
-if settings.DATABASES[DEFAULT_DB_ALIAS]['ENGINE'] != 'django.db.backends.mysql':
+if connection.features.supports_long_model_names:
     class VeryLongModelNameZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ(models.Model):
         class Meta:
             # We need to use a short actual table name or
@@ -55,3 +54,18 @@ class Post(models.Model):
         db_table = 'CaseSensitive_Post'
 
 
+class Reporter(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+
+    def __unicode__(self):
+        return u"%s %s" % (self.first_name, self.last_name)
+
+
+class Article(models.Model):
+    headline = models.CharField(max_length=100)
+    pub_date = models.DateField()
+    reporter = models.ForeignKey(Reporter)
+
+    def __unicode__(self):
+        return self.headline

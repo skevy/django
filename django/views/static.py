@@ -30,8 +30,6 @@ def serve(request, path, document_root=None, show_indexes=False):
     but if you'd like to override it, you can create a template called
     ``static/directory_index.html``.
     """
-
-    # Clean up given path to only allow serving files below document_root.
     path = posixpath.normpath(urllib.unquote(path))
     path = path.lstrip('/')
     newpath = ''
@@ -68,6 +66,7 @@ def serve(request, path, document_root=None, show_indexes=False):
     if encoding:
         response["Content-Encoding"] = encoding
     return response
+
 
 DEFAULT_DIRECTORY_INDEX_TEMPLATE = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -129,7 +128,10 @@ def was_modified_since(header=None, mtime=0, size=0):
             raise ValueError
         matches = re.match(r"^([^;]+)(; length=([0-9]+))?$", header,
                            re.IGNORECASE)
-        header_mtime = mktime_tz(parsedate_tz(matches.group(1)))
+        header_date = parsedate_tz(matches.group(1))
+        if header_date is None:
+            raise ValueError
+        header_mtime = mktime_tz(header_date)
         header_len = matches.group(3)
         if header_len and int(header_len) != size:
             raise ValueError

@@ -85,20 +85,31 @@ class AdminRadioFieldRenderer(RadioFieldRenderer):
 class AdminRadioSelect(forms.RadioSelect):
     renderer = AdminRadioFieldRenderer
 
-class AdminFileWidget(forms.FileInput):
-    """
-    A FileField Widget that shows its current value if it has one.
-    """
-    def __init__(self, attrs={}):
-        super(AdminFileWidget, self).__init__(attrs)
+class AdminFileWidget(forms.ClearableFileInput):
+    template_with_initial = (u'<p class="file-upload">%s</p>'
+                            % forms.ClearableFileInput.template_with_initial)
+    template_with_clear = (u'<span class="clearable-file-input">%s</span>'
+                           % forms.ClearableFileInput.template_with_clear)
 
-    def render(self, name, value, attrs=None):
-        output = []
-        if value and hasattr(value, "url"):
-            output.append('%s <a target="_blank" href="%s">%s</a> <br />%s ' % \
-                (_('Currently:'), value.url, value, _('Change:')))
-        output.append(super(AdminFileWidget, self).render(name, value, attrs))
-        return mark_safe(u''.join(output))
+def url_params_from_lookup_dict(lookups):
+    """
+    Converts the type of lookups specified in a ForeignKey limit_choices_to
+    attribute to a dictionary of query parameters
+    """
+    params = {}
+    if lookups and hasattr(lookups, 'items'):
+        items = []
+        for k, v in lookups.items():
+            if isinstance(v, list):
+                v = u','.join([str(x) for x in v])
+            elif isinstance(v, bool):
+                # See django.db.fields.BooleanField.get_prep_lookup
+                v = ('0', '1')[v]
+            else:
+                v = unicode(v)
+            items.append((k, v))
+        params.update(dict(items))
+    return params
 
 class ForeignKeyRawIdWidget(forms.TextInput):
     """
@@ -116,33 +127,23 @@ class ForeignKeyRawIdWidget(forms.TextInput):
         related_url = '../../../%s/%s/' % (self.rel.to._meta.app_label, self.rel.to._meta.object_name.lower())
         params = self.url_parameters()
         if params:
-            url = '?' + '&amp;'.join(['%s=%s' % (k, v) for k, v in params.items()])
+            url = u'?' + u'&amp;'.join([u'%s=%s' % (k, v) for k, v in params.items()])
         else:
-            url = ''
-        if not attrs.has_key('class'):
+            url = u''
+        if "class" not in attrs:
             attrs['class'] = 'vForeignKeyRawIdAdminField' # The JavaScript looks for this hook.
         output = [super(ForeignKeyRawIdWidget, self).render(name, value, attrs)]
         # TODO: "id_" is hard-coded here. This should instead use the correct
         # API to determine the ID dynamically.
-        output.append('<a href="%s%s" class="related-lookup" id="lookup_id_%s" onclick="return showRelatedObjectLookupPopup(this);"> ' % \
+        output.append(u'<a href="%s%s" class="related-lookup" id="lookup_id_%s" onclick="return showRelatedObjectLookupPopup(this);"> ' % \
             (related_url, url, name))
-        output.append('<img src="%simg/admin/selector-search.gif" width="16" height="16" alt="%s" /></a>' % (settings.ADMIN_MEDIA_PREFIX, _('Lookup')))
+        output.append(u'<img src="%simg/admin/selector-search.gif" width="16" height="16" alt="%s" /></a>' % (settings.ADMIN_MEDIA_PREFIX, _('Lookup')))
         if value:
             output.append(self.label_for_value(value))
         return mark_safe(u''.join(output))
 
     def base_url_parameters(self):
-        params = {}
-        if self.rel.limit_choices_to and hasattr(self.rel.limit_choices_to, 'items'):
-            items = []
-            for k, v in self.rel.limit_choices_to.items():
-                if isinstance(v, list):
-                    v = ','.join([str(x) for x in v])
-                else:
-                    v = str(v)
-                items.append((k, v))
-            params.update(dict(items))
-        return params
+        return url_params_from_lookup_dict(self.rel.limit_choices_to)
 
     def url_parameters(self):
         from django.contrib.admin.views.main import TO_FIELD_VAR
@@ -163,10 +164,9 @@ class ManyToManyRawIdWidget(ForeignKeyRawIdWidget):
     A Widget for displaying ManyToMany ids in the "raw_id" interface rather than
     in a <select multiple> box.
     """
-    def __init__(self, rel, attrs=None, using=None):
-        super(ManyToManyRawIdWidget, self).__init__(rel, attrs, using=None)
-
     def render(self, name, value, attrs=None):
+        if attrs is None:
+            attrs = {}
         attrs['class'] = 'vManyToManyRawIdAdminField'
         if value:
             value = ','.join([force_unicode(v) for v in value])
@@ -181,12 +181,9 @@ class ManyToManyRawIdWidget(ForeignKeyRawIdWidget):
         return ''
 
     def value_from_datadict(self, data, files, name):
-        value = data.get(name, None)
-        if value and ',' in value:
-            return data[name].split(',')
+        value = data.get(name)
         if value:
-            return [value]
-        return None
+            return value.split(',')
 
     def _has_changed(self, initial, data):
         if initial is None:
@@ -215,7 +212,7 @@ class RelatedFieldWidgetWrapper(forms.Widget):
         # Backwards compatible check for whether a user can add related
         # objects.
         if can_add_related is None:
-            can_add_related = rel_to in self.admin_site._registry
+            can_add_related = rel.to in admin_site._registry
         self.can_add_related = can_add_related
         # so we can check if the related object is registered with this AdminSite
         self.admin_site = admin_site

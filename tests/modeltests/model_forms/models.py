@@ -236,6 +236,12 @@ class CustomFieldForExclusionModel(models.Model):
     name = models.CharField(max_length=10)
     markup = MarkupField()
 
+class FlexibleDatePost(models.Model):
+    title = models.CharField(max_length=50, unique_for_date='posted', blank=True)
+    slug = models.CharField(max_length=50, unique_for_year='posted', blank=True)
+    subtitle = models.CharField(max_length=50, unique_for_month='posted', blank=True)
+    posted = models.DateField(blank=True, null=True)
+
 __test__ = {'API_TESTS': """
 >>> from django import forms
 >>> from django.forms.models import ModelForm, model_to_dict
@@ -1555,6 +1561,25 @@ ValidationError: [u'Select a valid choice. z is not one of the available choices
 >>> print CategoryForm()
 <tr><th><label for="id_description">Description:</label></th><td><input type="text" name="description" id="id_description" /></td></tr>
 <tr><th><label for="id_url">The URL:</label></th><td><input id="id_url" type="text" name="url" maxlength="40" /></td></tr>
+
+# to_field_name should also work on ModelMultipleChoiceField ##################
+
+>>> field = ModelMultipleChoiceField(Inventory.objects.all(), to_field_name='barcode')
+>>> for choice in field.choices:
+...     print choice
+(86, u'Apple')
+(22, u'Pear')
+(87, u'Core')
+>>> field.clean([86])
+[<Inventory: Apple>]
+
+>>> class SelectInventoryForm(forms.Form):
+...     items = ModelMultipleChoiceField(Inventory.objects.all(), to_field_name='barcode')
+>>> form = SelectInventoryForm({'items': [87, 22]})
+>>> form.is_valid()
+True
+>>> form.cleaned_data
+{'items': [<Inventory: Pear>, <Inventory: Core>]}
 
 # Model field that returns None to exclude itself with explicit fields ########
 

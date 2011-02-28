@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import simplejson as json
 from django.utils.encoding import force_unicode
 
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning, module='django.db.models.fields.subclassing')
 
 class Small(object):
     """
@@ -49,6 +51,9 @@ class SmallField(models.Field):
         if lookup_type == 'isnull':
             return []
         raise TypeError('Invalid lookup type: %r' % lookup_type)
+
+class SmallerField(SmallField):
+    pass
 
 
 class JSONField(models.TextField):

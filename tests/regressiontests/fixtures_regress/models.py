@@ -1,4 +1,4 @@
-from django.db import models, DEFAULT_DB_ALIAS
+from django.db import models, DEFAULT_DB_ALIAS, connection
 from django.contrib.auth.models import User
 from django.conf import settings
 
@@ -28,13 +28,7 @@ class Stuff(models.Model):
     owner = models.ForeignKey(User, null=True)
 
     def __unicode__(self):
-        # Oracle doesn't distinguish between None and the empty string.
-        # This hack makes the test case pass using Oracle.
-        name = self.name
-        if (settings.DATABASES[DEFAULT_DB_ALIAS]['ENGINE'] == 'django.db.backends.oracle'
-            and name == u''):
-            name = None
-        return unicode(name) + u' is owned by ' + unicode(self.owner)
+        return unicode(self.name) + u' is owned by ' + unicode(self.owner)
 
 
 class Absolute(models.Model):
@@ -225,3 +219,7 @@ class ExternalDependency(models.Model):
         return self.name
     natural_key.dependencies = ['fixtures_regress.book']
 
+
+# Model for regression test of #11101
+class Thingy(models.Model):
+    name = models.CharField(max_length=255)

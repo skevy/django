@@ -1,4 +1,5 @@
 import shutil
+import sys
 
 from django.core.cache import cache
 from django.core.files.base import ContentFile
@@ -6,6 +7,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
 from models import Storage, temp_storage, temp_storage_location
+if sys.version_info >= (2, 5):
+    from tests_25 import FileObjTests
 
 
 class FileTests(TestCase):
@@ -27,6 +30,7 @@ class FileTests(TestCase):
         self.assertEqual(obj1.normal.name, "tests/django_test.txt")
         self.assertEqual(obj1.normal.size, 7)
         self.assertEqual(obj1.normal.read(), "content")
+        obj1.normal.close()
 
         # File objects can be assigned to FileField attributes, but shouldn't
         # get committed until the model it's attached to is saved.
@@ -46,6 +50,7 @@ class FileTests(TestCase):
         self.assertEqual(obj1.normal.read(3), "con")
         self.assertEqual(obj1.normal.read(), "tent")
         self.assertEqual(list(obj1.normal.chunks(chunk_size=2)), ["co", "nt", "en", "t"])
+        obj1.normal.close()
 
         # Save another file with the same name.
         obj2 = Storage()
@@ -58,11 +63,10 @@ class FileTests(TestCase):
         cache.set("obj2", obj2)
         self.assertEqual(cache.get("obj2").normal.name, "tests/django_test_1.txt")
 
-        # Deleting an object deletes the file it uses, if there are no other
-        # objects still using that file.
+        # Deleting an object does not delete the file it uses.
         obj2.delete()
         obj2.normal.save("django_test.txt", ContentFile("more content"))
-        self.assertEqual(obj2.normal.name, "tests/django_test_1.txt")
+        self.assertEqual(obj2.normal.name, "tests/django_test_2.txt")
 
         # Multiple files with the same name get _N appended to them.
         objs = [Storage() for i in range(3)]
@@ -79,12 +83,14 @@ class FileTests(TestCase):
         obj3 = Storage.objects.create()
         self.assertEqual(obj3.default.name, "tests/default.txt")
         self.assertEqual(obj3.default.read(), "default content")
+        obj3.default.close()
 
         # But it shouldn't be deleted, even if there are no more objects using
         # it.
         obj3.delete()
         obj3 = Storage()
         self.assertEqual(obj3.default.read(), "default content")
+        obj3.default.close()
 
         # Verify the fix for #5655, making sure the directory is only
         # determined once.
@@ -97,4 +103,3 @@ class FileTests(TestCase):
         obj2.normal.delete()
         obj3.default.delete()
         obj4.random.delete()
-

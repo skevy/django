@@ -1,12 +1,10 @@
-from django.test import TestCase
-
 from django.contrib.admin.helpers import InlineAdminForm
 from django.contrib.contenttypes.models import ContentType
+from django.test import TestCase
+
 # local test models
-from models import Holder, Inner, InnerInline
-from models import Holder2, Inner2, Holder3, Inner3
-from models import Person, OutfitItem, Fashionista
-from models import Teacher, Parent, Child
+from models import (Holder, Inner, InnerInline, Holder2, Inner2, Holder3,
+    Inner3, Person, OutfitItem, Fashionista, Teacher, Parent, Child)
 
 
 class TestInline(TestCase):
@@ -19,7 +17,7 @@ class TestInline(TestCase):
         self.change_url = '/test_admin/admin/admin_inlines/holder/%i/' % holder.id
 
         result = self.client.login(username='super', password='secret')
-        self.failUnlessEqual(result, True)
+        self.assertEqual(result, True)
 
     def tearDown(self):
         self.client.logout()
@@ -69,13 +67,49 @@ class TestInline(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(len(Fashionista.objects.filter(person__firstname='Imelda')), 1)
 
+    def test_tabular_non_field_errors(self):
+        """
+        Ensure that non_field_errors are displayed correctly, including the
+        right value for colspan. Refs #13510.
+        """
+        data = {
+            'title_set-TOTAL_FORMS': 1,
+            'title_set-INITIAL_FORMS': 0,
+            'title_set-MAX_NUM_FORMS': 0,
+            '_save': u'Save',
+            'title_set-0-title1': 'a title',
+            'title_set-0-title2': 'a different title',
+        }
+        response = self.client.post('/test_admin/admin/admin_inlines/titlecollection/add/', data)
+        # Here colspan is "4": two fields (title1 and title2), one hidden field and the delete checkbock.
+        self.assertContains(response, '<tr><td colspan="4"><ul class="errorlist"><li>The two titles must be the same</li></ul></td></tr>')
+
+    def test_no_parent_callable_lookup(self):
+        """Admin inline `readonly_field` shouldn't invoke parent ModelAdmin callable"""
+        # Identically named callable isn't present in the parent ModelAdmin,
+        # rendering of the add view shouldn't explode
+        response = self.client.get('/test_admin/admin/admin_inlines/novel/add/')
+        self.assertEqual(response.status_code, 200)
+        # View should have the child inlines section
+        self.assertContains(response, '<div class="inline-group" id="chapter_set-group">')
+
+    def test_callable_lookup(self):
+        """Admin inline should invoke local callable when its name is listed in readonly_fields"""
+        response = self.client.get('/test_admin/admin/admin_inlines/poll/add/')
+        self.assertEqual(response.status_code, 200)
+        # Add parent object view should have the child inlines section
+        self.assertContains(response, '<div class="inline-group" id="question_set-group">')
+        # The right callabe should be used for the inline readonly_fields
+        # column cells
+        self.assertContains(response, '<p>Callable in QuestionInline</p>')
+
 class TestInlineMedia(TestCase):
     fixtures = ['admin-views-users.xml']
 
     def setUp(self):
 
         result = self.client.login(username='super', password='secret')
-        self.failUnlessEqual(result, True)
+        self.assertEqual(result, True)
 
     def tearDown(self):
         self.client.logout()
