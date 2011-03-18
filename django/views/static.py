@@ -7,14 +7,11 @@ import mimetypes
 import os
 import posixpath
 import re
-import stat
 import urllib
-from email.Utils import parsedate_tz, mktime_tz
 
-from django.template import loader
 from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpResponseNotModified
-from django.template import Template, Context, TemplateDoesNotExist
-from django.utils.http import http_date
+from django.template import loader, Template, Context, TemplateDoesNotExist
+from django.utils.http import http_date, parse_http_date
 
 def serve(request, path, document_root=None, show_indexes=False):
     """
@@ -57,12 +54,11 @@ def serve(request, path, document_root=None, show_indexes=False):
     mimetype, encoding = mimetypes.guess_type(fullpath)
     mimetype = mimetype or 'application/octet-stream'
     if not was_modified_since(request.META.get('HTTP_IF_MODIFIED_SINCE'),
-                              statobj[stat.ST_MTIME], statobj[stat.ST_SIZE]):
+                              statobj.st_mtime, statobj.st_size):
         return HttpResponseNotModified(mimetype=mimetype)
-    contents = open(fullpath, 'rb').read()
-    response = HttpResponse(contents, mimetype=mimetype)
-    response["Last-Modified"] = http_date(statobj[stat.ST_MTIME])
-    response["Content-Length"] = len(contents)
+    response = HttpResponse(open(fullpath, 'rb').read(), mimetype=mimetype)
+    response["Last-Modified"] = http_date(statobj.st_mtime)
+    response["Content-Length"] = statobj.st_size
     if encoding:
         response["Content-Encoding"] = encoding
     return response
@@ -128,10 +124,7 @@ def was_modified_since(header=None, mtime=0, size=0):
             raise ValueError
         matches = re.match(r"^([^;]+)(; length=([0-9]+))?$", header,
                            re.IGNORECASE)
-        header_date = parsedate_tz(matches.group(1))
-        if header_date is None:
-            raise ValueError
-        header_mtime = mktime_tz(header_date)
+        header_mtime = parse_http_date(matches.group(1))
         header_len = matches.group(3)
         if header_len and int(header_len) != size:
             raise ValueError

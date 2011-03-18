@@ -166,7 +166,9 @@ class HttpRequest(object):
         return host
 
     def get_full_path(self):
-        return ''
+        # RFC 3986 requires query string arguments to be in the ASCII range.
+        # Rather than crash if this doesn't happen, we encode defensively.
+        return '%s%s' % (self.path, self.META.get('QUERY_STRING', '') and ('?' + iri_to_uri(self.META.get('QUERY_STRING', ''))) or '')
 
     def build_absolute_uri(self, location=None):
         """
@@ -632,14 +634,14 @@ class HttpResponseRedirect(HttpResponse):
     status_code = 302
 
     def __init__(self, redirect_to):
-        HttpResponse.__init__(self)
+        super(HttpResponseRedirect, self).__init__()
         self['Location'] = iri_to_uri(redirect_to)
 
 class HttpResponsePermanentRedirect(HttpResponse):
     status_code = 301
 
     def __init__(self, redirect_to):
-        HttpResponse.__init__(self)
+        super(HttpResponsePermanentRedirect, self).__init__()
         self['Location'] = iri_to_uri(redirect_to)
 
 class HttpResponseNotModified(HttpResponse):
@@ -658,20 +660,14 @@ class HttpResponseNotAllowed(HttpResponse):
     status_code = 405
 
     def __init__(self, permitted_methods):
-        HttpResponse.__init__(self)
+        super(HttpResponseNotAllowed, self).__init__()
         self['Allow'] = ', '.join(permitted_methods)
 
 class HttpResponseGone(HttpResponse):
     status_code = 410
 
-    def __init__(self, *args, **kwargs):
-        HttpResponse.__init__(self, *args, **kwargs)
-
 class HttpResponseServerError(HttpResponse):
     status_code = 500
-
-    def __init__(self, *args, **kwargs):
-        HttpResponse.__init__(self, *args, **kwargs)
 
 # A backwards compatible alias for HttpRequest.get_host.
 def get_host(request):

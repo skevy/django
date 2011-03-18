@@ -1,63 +1,66 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# This file is distributed under the same license as the Django package.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 20:56+0100\n"
-"PO-Revision-Date: 2006-05-13 11:48-0000\n"
-"Last-Translator: Dagur Páll Ammendrup <dagurp@gmail.com>\n"
-"Language-Team: Icelandic <dagurp@gmail.com>\n"
+"POT-Creation-Date: 2011-03-15 13:13-0400\n"
+"PO-Revision-Date: 2011-03-04 18:14+0000\n"
+"Last-Translator: haffi67 <haffi67@gmail.com>\n"
+"Language-Team: Icelandic <None>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Icelandic\n"
-"X-Poedit-Country: ICELAND\n"
+"Language: is\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: media/js/SelectFilter2.js:37
+#: media/js/SelectFilter2.js:45
 #, perl-format
 msgid "Available %s"
 msgstr "Fáanleg %s"
 
-#: media/js/SelectFilter2.js:45
+#: media/js/SelectFilter2.js:52
+msgid "Filter"
+msgstr "Sía"
+
+#: media/js/SelectFilter2.js:59
 msgid "Choose all"
 msgstr "Velja öll"
 
-#: media/js/SelectFilter2.js:50
+#: media/js/SelectFilter2.js:64
 msgid "Add"
 msgstr "Bæta við"
 
-#: media/js/SelectFilter2.js:52
+#: media/js/SelectFilter2.js:66
 msgid "Remove"
 msgstr "Fjarlægja"
 
-#: media/js/SelectFilter2.js:57
+#: media/js/SelectFilter2.js:71
 #, perl-format
 msgid "Chosen %s"
 msgstr "Valin %s"
 
-#: media/js/SelectFilter2.js:58
+#: media/js/SelectFilter2.js:72
 msgid "Select your choice(s) and click "
 msgstr "Veldu úr valmöguleikunum og smelltu"
 
-#: media/js/SelectFilter2.js:63
+#: media/js/SelectFilter2.js:77
 msgid "Clear all"
 msgstr "Hreinsa öll"
 
 #: media/js/actions.js:18 media/js/actions.min.js:1
 msgid "%(sel)s of %(cnt)s selected"
 msgid_plural "%(sel)s of %(cnt)s selected"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " %(sel)s  í %(cnt)s  valin"
+msgstr[1] " %(sel)s  í %(cnt)s  valin"
 
 #: media/js/actions.js:109 media/js/actions.min.js:5
 msgid ""
 "You have unsaved changes on individual editable fields. If you run an "
 "action, your unsaved changes will be lost."
 msgstr ""
+"Enn eru óvistaðar breytingar í reitum. Ef þú keyrir aðgerð munu breytingar "
+"ekki verða vistaðar."
 
 #: media/js/actions.js:121 media/js/actions.min.js:6
 msgid ""
@@ -65,6 +68,8 @@ msgid ""
 "individual fields yet. Please click OK to save. You'll need to re-run the "
 "action."
 msgstr ""
+"Þú hefur valið aðgerð en hefur ekki vistað breytingar á reitum. Vinsamlegast "
+"veldu 'Í lagi' til að vista. Þú þarft að endurkeyra aðgerðina."
 
 #: media/js/actions.js:123 media/js/actions.min.js:6
 msgid ""
@@ -72,6 +77,8 @@ msgid ""
 "fields. You're probably looking for the Go button rather than the Save "
 "button."
 msgstr ""
+"Þú hefur valið aðgerð en hefur ekki gert breytingar á reitum. Þú ert líklega "
+"að leita að 'Fara' hnappnum frekar en 'Vista' hnappnum."
 
 #: media/js/calendar.js:24 media/js/dateparse.js:32
 msgid ""
@@ -88,11 +95,11 @@ msgstr "S M Þ M F F L"
 #: media/js/collapse.js:9 media/js/collapse.js.py:21
 #: media/js/collapse.min.js:1
 msgid "Show"
-msgstr ""
+msgstr "Sýna"
 
 #: media/js/collapse.js:16 media/js/collapse.min.js:1
 msgid "Hide"
-msgstr ""
+msgstr "Fela"
 
 #: media/js/dateparse.js:33
 msgid "Sunday Monday Tuesday Wednesday Thursday Friday Saturday"

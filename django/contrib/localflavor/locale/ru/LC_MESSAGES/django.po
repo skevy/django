@@ -1,21 +1,19 @@
-# Translation of django.po to russian.
 # This file is distributed under the same license as the Django package.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 00:28+0100\n"
-"PO-Revision-Date: 2010-05-11 17:36+0300\n"
-"Last-Translator: alexey boriskin <sun.void@gmail.com>\n"
-"Language-Team: Russian\n"
+"POT-Creation-Date: 2011-03-15 13:19-0400\n"
+"PO-Revision-Date: 2011-03-04 18:43+0000\n"
+"Last-Translator: dnx <sinednx@gmail.com>\n"
+"Language-Team: Russian <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Poedit-Language: Russian\n"
-"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: ar/forms.py:28
 msgid "Enter a postal code in the format NNNN or ANNNNAAA."
@@ -88,76 +86,65 @@ msgid "Enter a 4 digit post code."
 msgstr "Введите почтовый индекс из 4 цифр."
 
 #: be/be_provinces.py:5
-#, fuzzy
 msgid "Antwerp"
-msgstr "Антрим"
+msgstr "Антверпен"
 
 #: be/be_provinces.py:6
-#, fuzzy
 msgid "Brussels"
-msgstr "пользователи"
+msgstr "Брюссель"
 
 #: be/be_provinces.py:7
-#, fuzzy
 msgid "East Flanders"
-msgstr "Уэст-Мидлендс"
+msgstr "Восточная Фландрия"
 
 #: be/be_provinces.py:8
 msgid "Flemish Brabant"
-msgstr ""
+msgstr "Фламандский Брабант"
 
 #: be/be_provinces.py:9
-#, fuzzy
 msgid "Hainaut"
-msgstr "минута"
+msgstr "Хаинаут"
 
 #: be/be_provinces.py:10
 msgid "Liege"
-msgstr ""
+msgstr "Льеж"
 
 #: be/be_provinces.py:11 nl/nl_provinces.py:9
 msgid "Limburg"
 msgstr "Лимбург"
 
 #: be/be_provinces.py:12
-#, fuzzy
 msgid "Luxembourg"
-msgstr "Лимбург"
+msgstr "Люксембург"
 
 #: be/be_provinces.py:13
-#, fuzzy
 msgid "Namur"
-msgstr "Имя"
+msgstr "Намюр"
 
 #: be/be_provinces.py:14
-#, fuzzy
 msgid "Walloon Brabant"
-msgstr "Северный Брабант"
+msgstr "Валлонский Брабант"
 
 #: be/be_provinces.py:15
-#, fuzzy
 msgid "West Flanders"
-msgstr "Уэст-Мидлендс"
+msgstr "Западная Фландрия"
 
 #: be/be_regions.py:5
-#, fuzzy
 msgid "Brussels Capital Region"
-msgstr "Братиславский край"
+msgstr "Брюссельская Капитальная Область"
 
 #: be/be_regions.py:6
-#, fuzzy
 msgid "Flemish Region"
-msgstr "Злинский край"
+msgstr "Фламандский регион"
 
 #: be/be_regions.py:7
-#, fuzzy
 msgid "Wallonia"
-msgstr "Каталония"
+msgstr "Валлония"
 
 #: be/forms.py:23
-#, fuzzy
 msgid "Enter a valid postal code in the range and format 1XXX - 9XXX."
-msgstr "Введите почтовый индекс в диапазоне и формате 01XXX - 52XXX."
+msgstr ""
+"Введите действительный почтовый индекс в диапазон и формат 1xxx - 9xxx."
 
 #: be/forms.py:46
 msgid ""
@@ -165,6 +152,9 @@ msgid ""
 "04xx xx xx xx, 0x/xxx.xx.xx, 0xx/xx.xx.xx, 04xx/xx.xx.xx, 0x.xxx.xx.xx, 0xx."
 "xx.xx.xx, 04xx.xx.xx.xx, 0xxxxxxxx or 04xxxxxxxx."
 msgstr ""
+"Введите действительный номер телефона в одном из форматов 0x хх хх ххх, 0xx "
+"хх хх хх, 04xx хх хх хх, 0x/xxx.xx.xx, 0xx/xx.xx.xx, 04xx/xx.xx.xx, 0x . xxx."
+"xx.xx, 0xx.xx.xx.xx, 04xx.xx.xx.xx, 0xxxxxxxx или 04xxxxxxxx."
 
 #: br/forms.py:17
 msgid "Enter a zip code in the format XXXXX-XXX."
@@ -817,9 +807,8 @@ msgid "Enter a valid NIK/KTP number"
 msgstr "Введите правильный NIK/KTP номер"
 
 #: id/id_choices.py:15
-#, fuzzy
 msgid "Aceh"
-msgstr "Айчи"
+msgstr "Ачех"
 
 #: id/id_choices.py:16 id/id_choices.py:79
 msgid "Bali"
@@ -1210,14 +1199,12 @@ msgid "Wicklow"
 msgstr "Уиклоу"
 
 #: il/forms.py:31
-#, fuzzy
 msgid "Enter a postal code in the format XXXXX"
-msgstr "Введите почтовый индекс в формате XX-XXX."
+msgstr "Введите почтовый индекс в формате XXXXX"
 
 #: il/forms.py:50
-#, fuzzy
 msgid "Enter a valid ID number."
-msgstr "Введите правильный IC номер."
+msgstr "Введите действительный ID номер."
 
 #: in_/forms.py:15
 msgid "Enter a zip code in the format XXXXXXX."
@@ -2207,24 +2194,20 @@ msgid "Zilina region"
 msgstr "Жилинский край"
 
 #: tr/forms.py:16
-#, fuzzy
 msgid "Enter a postal code in the format XXXXX."
-msgstr "Введите почтовый индекс в формате XX-XXX."
+msgstr "Введите почтовый индекс в формате XXXXX."
 
 #: tr/forms.py:37
-#, fuzzy
 msgid "Phone numbers must be in 0XXX XXX XXXX format."
-msgstr "Телефонные номера должны быть в формате 0X XX XX XX XX."
+msgstr "Номера телефонов должны быть в формате 0xxx XXX XXXX."
 
 #: tr/forms.py:64
-#, fuzzy
 msgid "Enter a valid Turkish Identification number."
-msgstr "Введите правильный шведский идентификационный номер организации."
+msgstr "Введите действительный турецкий Идентификационный номер."
 
 #: tr/forms.py:65
-#, fuzzy
 msgid "Turkish Identification number must be 11 digits."
-msgstr "Национальный идентификационный номер состоит из 11 цифр."
+msgstr "У турецкого Идентификационного номера должно быть 11 цифр."
 
 #: uk/forms.py:21
 msgid "Enter a valid postcode."
@@ -2532,9 +2515,8 @@ msgid "U.S. state (two uppercase letters)"
 msgstr "Штат США (две заглавные буквы)"
 
 #: us/models.py:18
-#, fuzzy
 msgid "U.S. postal code (two uppercase letters)"
-msgstr "Штат США (две заглавные буквы)"
+msgstr "Американский индекс (две заглавные буквы)"
 
 #: us/models.py:27
 msgid "Phone number"

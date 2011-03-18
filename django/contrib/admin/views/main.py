@@ -2,10 +2,10 @@ from django.contrib.admin.filterspecs import FilterSpec
 from django.contrib.admin.options import IncorrectLookupParameters
 from django.contrib.admin.util import quote, get_fields_from_path
 from django.core.exceptions import SuspiciousOperation
-from django.core.paginator import Paginator, InvalidPage
+from django.core.paginator import InvalidPage
 from django.db import models
 from django.utils.encoding import force_unicode, smart_str
-from django.utils.translation import ugettext
+from django.utils.translation import ugettext, ugettext_lazy
 from django.utils.http import urlencode
 import operator
 
@@ -24,7 +24,7 @@ IS_POPUP_VAR = 'pop'
 ERROR_FLAG = 'e'
 
 # Text to display within change-list table cells if the value is blank.
-EMPTY_CHANGELIST_VALUE = '(None)'
+EMPTY_CHANGELIST_VALUE = ugettext_lazy('(None)')
 
 class ChangeList(object):
     def __init__(self, request, model, list_display, list_display_links, list_filter, date_hierarchy, search_fields, list_select_related, list_per_page, list_editable, model_admin):
@@ -254,12 +254,15 @@ class ChangeList(object):
                 return "%s__icontains" % field_name
 
         if self.search_fields and self.query:
+            orm_lookups = [construct_search(str(search_field))
+                           for search_field in self.search_fields]
             for bit in self.query.split():
-                or_queries = [models.Q(**{construct_search(str(field_name)): bit}) for field_name in self.search_fields]
+                or_queries = [models.Q(**{orm_lookup: bit})
+                              for orm_lookup in orm_lookups]
                 qs = qs.filter(reduce(operator.or_, or_queries))
             if not use_distinct:
-                for search_field in self.search_fields:
-                    field_name = search_field.split('__', 1)[0]
+                for search_spec in orm_lookups:
+                    field_name = search_spec.split('__', 1)[0]
                     f = self.lookup_opts.get_field_by_name(field_name)[0]
                     if hasattr(f, 'rel') and isinstance(f.rel, models.ManyToManyRel):
                         use_distinct = True

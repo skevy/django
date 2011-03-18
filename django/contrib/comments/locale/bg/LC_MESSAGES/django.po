@@ -1,110 +1,101 @@
-# translation of django.po to Bulgarian
-#
+# This file is distributed under the same license as the Django package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: django\n"
+"Project-Id-Version: Django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 00:23+0100\n"
-"PO-Revision-Date: 2008-03-12 13:01+0200\n"
-"Last-Translator: Vladislav <vladislav.mitov@gmail.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2011-03-15 13:14-0400\n"
+"PO-Revision-Date: 2011-03-10 05:40+0000\n"
+"Last-Translator: tlubenov <tlubenov@gmail.com>\n"
+"Language-Team: Bulgarian <None>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: admin.py:12
-#, fuzzy
 msgid "Content"
-msgstr "съдържание"
+msgstr "Съдържание"
 
 #: admin.py:15
 msgid "Metadata"
-msgstr ""
+msgstr "Метаданни"
 
 #: admin.py:42
-#, fuzzy
 msgid "flagged"
 msgid_plural "flagged"
-msgstr[0] "дата на флагване"
-msgstr[1] "дата на флагване"
+msgstr[0] "маркиран"
+msgstr[1] "маркирани"
 
 #: admin.py:43
-#, fuzzy
 msgid "Flag selected comments"
-msgstr "позволяване на коментари"
+msgstr "Маркирай избраните коментари"
 
 #: admin.py:47
-#, fuzzy
 msgid "approved"
 msgid_plural "approved"
-msgstr[0] "одобрен от персонала"
-msgstr[1] "одобрен от персонала"
+msgstr[0] "одобрен"
+msgstr[1] "одобрени"
 
 #: admin.py:48
-#, fuzzy
 msgid "Approve selected comments"
-msgstr "свободни коментари"
+msgstr "Одобри избраните коментари"
 
 #: admin.py:52
-#, fuzzy
 msgid "removed"
 msgid_plural "removed"
-msgstr[0] "е премахнат"
-msgstr[1] "е премахнат"
+msgstr[0] "отстранен"
+msgstr[1] "отстранени"
 
 #: admin.py:53
-#, fuzzy
 msgid "Remove selected comments"
-msgstr "позволяване на коментари"
+msgstr "Премахване на избраните коментари"
 
 #: admin.py:65
 #, python-format
 msgid "1 comment was successfully %(action)s."
 msgid_plural "%(count)s comments were successfully %(action)s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(count)s коментар беше успешно %(action)s."
+msgstr[1] "%(count)s коментари бяха успешно %(action)s."
 
 #: feeds.py:13
-#, fuzzy, python-format
+#, python-format
 msgid "%(site_name)s comments"
-msgstr "позволяване на коментари"
+msgstr "%(site_name)s коментари"
 
 #: feeds.py:23
-#, fuzzy, python-format
+#, python-format
 msgid "Latest comments on %(site_name)s"
-msgstr "за Вашия потребителски акаунт в %(site_name)s"
+msgstr "Последни коментари  на %(site_name)s"
 
 #: forms.py:109
-#, fuzzy
 msgid "Name"
-msgstr "име"
+msgstr "Име"
 
 #: forms.py:110
-#, fuzzy
 msgid "Email address"
-msgstr "E-mail адрес"
+msgstr "Email адрес"
 
 #: forms.py:111
 msgid "URL"
 msgstr "URL"
 
 #: forms.py:112
-#, fuzzy
 msgid "Comment"
-msgstr "Коментар:"
+msgstr "Коментар"
 
 #: forms.py:191
-#, fuzzy, python-format
+#, python-format
 msgid "Watch your mouth! The word %s is not allowed here."
 msgid_plural "Watch your mouth! The words %s are not allowed here."
-msgstr[0] "Ей-шш! Думичката %s не е позволена тук.  "
-msgstr[1] "Ей-шш! Думичката %s не е позволена тук.  "
+msgstr[0] "Внимание! Такава дума %s не се допускат."
+msgstr[1] "Внимание! Такива думи %s не се допускат."
 
 #: forms.py:198
 msgid ""
 "If you enter anything in this field your comment will be treated as spam"
-msgstr ""
+msgstr "Ако въведете нещо в това поле, вашия коментар ще се третира като спам"
 
 #: models.py:22
 msgid "content type"
@@ -119,19 +110,16 @@ msgid "user"
 msgstr "потребител"
 
 #: models.py:52
-#, fuzzy
 msgid "user's name"
-msgstr "потребител"
+msgstr "потребителско име"
 
 #: models.py:53
-#, fuzzy
 msgid "user's email address"
-msgstr "e-mail адрес"
+msgstr "имейл адреса на потребителя"
 
 #: models.py:54
-#, fuzzy
 msgid "user's URL"
-msgstr "потребители"
+msgstr "URL на потребителя"
 
 #: models.py:56 models.py:76 models.py:169
 msgid "comment"
@@ -153,6 +141,7 @@ msgstr "е публичен"
 msgid ""
 "Uncheck this box to make the comment effectively disappear from the site."
 msgstr ""
+"Махнете отметката от това поле, за да изчезне коментара ефективно от сайта."
 
 #: models.py:64
 msgid "is removed"
@@ -171,24 +160,20 @@ msgid "comments"
 msgstr "коментари"
 
 #: models.py:119
-#, fuzzy
 msgid ""
 "This comment was posted by an authenticated user and thus the name is read-"
 "only."
 msgstr ""
-"Този коментар е от съмнителен потребител:\n"
-"\n"
-"%(text)s"
+"Този коментар беше публикуван от регистриран потребител, затова името е само "
+"за четене."
 
 #: models.py:128
-#, fuzzy
 msgid ""
 "This comment was posted by an authenticated user and thus the email is read-"
 "only."
 msgstr ""
-"Този коментар е от съмнителен потребител:\n"
-"\n"
-"%(text)s"
+"Този коментар беше публикуван от регистриран потребител, затова електронната "
+"поща е само за четене."
 
 #: models.py:153
 #, python-format
@@ -206,127 +191,111 @@ msgstr ""
 "http://%(domain)s%(url)s"
 
 #: models.py:170
-#, fuzzy
 msgid "flag"
-msgstr "дата на флагване"
+msgstr "флаг"
 
 #: models.py:171
-#, fuzzy
 msgid "date"
-msgstr "Коя-да-е дата"
+msgstr "дата"
 
 #: models.py:181
-#, fuzzy
 msgid "comment flag"
-msgstr "коментар"
+msgstr "коментар флаг"
 
 #: models.py:182
-#, fuzzy
 msgid "comment flags"
-msgstr "коментари"
+msgstr "коментар флагове"
 
 #: templates/comments/approve.html:4
-#, fuzzy
 msgid "Approve a comment"
-msgstr "свободен коментар"
+msgstr "Приемане на коментар"
 
 #: templates/comments/approve.html:7
 msgid "Really make this comment public?"
-msgstr ""
+msgstr "Наистина ли да стане този коментар публичен?"
 
 #: templates/comments/approve.html:12
 msgid "Approve"
-msgstr ""
+msgstr "Одобри"
 
 #: templates/comments/approved.html:4
-#, fuzzy
 msgid "Thanks for approving"
-msgstr "Много се радваме, че използвате сайта ни!"
+msgstr "Благодаря за одобрението"
 
 #: templates/comments/approved.html:7 templates/comments/deleted.html:7
 #: templates/comments/flagged.html:7
 msgid ""
 "Thanks for taking the time to improve the quality of discussion on our site"
 msgstr ""
+"Благодаря, че отделихте време, за да се подобри качеството на обсъждането на "
+"нашия сайт"
 
 #: templates/comments/delete.html:4
-#, fuzzy
 msgid "Remove a comment"
-msgstr "свободен коментар"
+msgstr "Премахване на коментар"
 
 #: templates/comments/delete.html:7
 msgid "Really remove this comment?"
-msgstr ""
+msgstr "Наистина премахни този коментар?"
 
 #: templates/comments/delete.html:12
-#, fuzzy
 msgid "Remove"
-msgstr "е премахнат"
+msgstr "Премахване"
 
 #: templates/comments/deleted.html:4
-#, fuzzy
 msgid "Thanks for removing"
-msgstr "Много се радваме, че използвате сайта ни!"
+msgstr "Благодаря за премахването"
 
 #: templates/comments/flag.html:4
 msgid "Flag this comment"
-msgstr ""
+msgstr "Отметни този коментар"
 
 #: templates/comments/flag.html:7
 msgid "Really flag this comment?"
-msgstr ""
+msgstr "Наистина отметни този коментар?"
 
 #: templates/comments/flag.html:12
-#, fuzzy
 msgid "Flag"
-msgstr "Малага"
+msgstr "Флаг"
 
 #: templates/comments/flagged.html:4
-#, fuzzy
 msgid "Thanks for flagging"
-msgstr "Много се радваме, че използвате сайта ни!"
+msgstr "Благодаря за отбелязването"
 
 #: templates/comments/form.html:17 templates/comments/preview.html:32
-#, fuzzy
 msgid "Post"
-msgstr "ви"
+msgstr "Пост"
 
 #: templates/comments/form.html:18 templates/comments/preview.html:33
-#, fuzzy
 msgid "Preview"
-msgstr "изглед:"
+msgstr "Преглед"
 
 #: templates/comments/posted.html:4
-#, fuzzy
 msgid "Thanks for commenting"
-msgstr "свободен коментар"
+msgstr "Благодаря за коментирането"
 
 #: templates/comments/posted.html:7
 msgid "Thank you for your comment"
-msgstr ""
+msgstr "Благодаря за вашия коментар"
 
 #: templates/comments/preview.html:4 templates/comments/preview.html.py:13
-#, fuzzy
 msgid "Preview your comment"
-msgstr "Преглед на коментара"
+msgstr "Преглед на коментар"
 
 #: templates/comments/preview.html:11
-#, fuzzy
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] "Коригирайте долу допуснатата грешка.  "
-msgstr[1] "Коригирайте долу допуснатата грешка.  "
+msgstr[0] "Моля, поправете грешката по-долу"
+msgstr[1] "Моля, поправете грешките по-долу"
 
 #: templates/comments/preview.html:16
 msgid "and"
 msgstr "и"
 
 #: templates/comments/preview.html:16
-#, fuzzy
 msgid "Post your comment"
-msgstr "Преглед на коментара"
+msgstr "Публикувай коментар"
 
 #: templates/comments/preview.html:16
-#, fuzzy
 msgid "or make changes"
-msgstr "Няма променени полета."
+msgstr "или да направете промени"

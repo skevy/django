@@ -1,18 +1,18 @@
-# Icelandic translation of Django.
 # This file is distributed under the same license as the Django package.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-29 00:23+0100\n"
-"PO-Revision-Date: 2008-09-09 16:34-0000\n"
-"Last-Translator: Jökull Sólberg Auðunsson <jokullsolberg@gmail.com>\n"
-"Language-Team:  <dagurp@gmail.com>\n"
+"POT-Creation-Date: 2011-03-15 13:15-0400\n"
+"PO-Revision-Date: 2011-03-04 18:43+0000\n"
+"Last-Translator: haffi67 <haffi67@gmail.com>\n"
+"Language-Team: Icelandic <None>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
+"Language: is\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: admin.py:12
 msgid "Content"
@@ -23,57 +23,51 @@ msgid "Metadata"
 msgstr "Hengigögn"
 
 #: admin.py:42
-#, fuzzy
 msgid "flagged"
 msgid_plural "flagged"
-msgstr[0] "flatskrá"
-msgstr[1] "flatskrá"
+msgstr[0] "flaggað"
+msgstr[1] "flaggað"
 
 #: admin.py:43
-#, fuzzy
 msgid "Flag selected comments"
-msgstr "virkja athugasemdir"
+msgstr "Flagga valdar athugasemdir"
 
 #: admin.py:47
-#, fuzzy
 msgid "approved"
 msgid_plural "approved"
-msgstr[0] "samþykkt af umsjónarmönnum"
-msgstr[1] "samþykkt af umsjónarmönnum"
+msgstr[0] "samþykkt"
+msgstr[1] "samþykkt"
 
 #: admin.py:48
-#, fuzzy
 msgid "Approve selected comments"
-msgstr "frjálsar athugasemdir"
+msgstr "Samþykkja valdar athugasemdir"
 
 #: admin.py:52
-#, fuzzy
 msgid "removed"
 msgid_plural "removed"
-msgstr[0] "hefur verið fjarlægt"
-msgstr[1] "hefur verið fjarlægt"
+msgstr[0] "fjarlægð"
+msgstr[1] "fjarlægðar"
 
 #: admin.py:53
-#, fuzzy
 msgid "Remove selected comments"
-msgstr "virkja athugasemdir"
+msgstr "Fjarlægja valdar athugasemdir"
 
 #: admin.py:65
 #, python-format
 msgid "1 comment was successfully %(action)s."
 msgid_plural "%(count)s comments were successfully %(action)s."
-msgstr[0] ""
+msgstr[0] "Það tókst að %(action)s %(count)s athugasemdum."
 msgstr[1] ""
 
 #: feeds.py:13
-#, fuzzy, python-format
+#, python-format
 msgid "%(site_name)s comments"
-msgstr "virkja athugasemdir"
+msgstr "%(site_name)s: athugasemdir"
 
 #: feeds.py:23
-#, fuzzy, python-format
+#, python-format
 msgid "Latest comments on %(site_name)s"
-msgstr "fyrir notandareikning þinn á %(site_name)s"
+msgstr "Nýjustu athugasemdir á %(site_name)s"
 
 #: forms.py:109
 msgid "Name"
@@ -198,126 +192,109 @@ msgstr ""
 "http://%(domain)s%(url)s"
 
 #: models.py:170
-#, fuzzy
 msgid "flag"
-msgstr "flatskrá"
+msgstr "flagga"
 
 #: models.py:171
-#, fuzzy
 msgid "date"
-msgstr "Allar dagsetningar"
+msgstr "dagsetning"
 
 #: models.py:181
-#, fuzzy
 msgid "comment flag"
-msgstr "athugasemd"
+msgstr "flagg athugasemdar"
 
 #: models.py:182
-#, fuzzy
 msgid "comment flags"
-msgstr "athugasemdir"
+msgstr "flögg athugasemdar"
 
 #: templates/comments/approve.html:4
-#, fuzzy
 msgid "Approve a comment"
-msgstr "frjáls athugasemd"
+msgstr "Samþykkja athugasemd"
 
 #: templates/comments/approve.html:7
 msgid "Really make this comment public?"
-msgstr ""
+msgstr "Gera þessa athugasemd sýnilega?"
 
 #: templates/comments/approve.html:12
 msgid "Approve"
-msgstr ""
+msgstr "Samþykkja"
 
 #: templates/comments/approved.html:4
-#, fuzzy
 msgid "Thanks for approving"
-msgstr "Takk fyrir að nota vefinn okkar!"
+msgstr "Takk fyrir að samþykkja"
 
 #: templates/comments/approved.html:7 templates/comments/deleted.html:7
 #: templates/comments/flagged.html:7
 msgid ""
 "Thanks for taking the time to improve the quality of discussion on our site"
-msgstr ""
+msgstr "Takk fyrir að gefa þér tíma til að bæta gæði umræðunnar á síðunni."
 
 #: templates/comments/delete.html:4
-#, fuzzy
 msgid "Remove a comment"
-msgstr "frjáls athugasemd"
+msgstr "Fjarlægja athugasemd"
 
 #: templates/comments/delete.html:7
 msgid "Really remove this comment?"
-msgstr ""
+msgstr "Eyða þessari athugasemd?"
 
 #: templates/comments/delete.html:12
-#, fuzzy
 msgid "Remove"
-msgstr "hefur verið fjarlægt"
+msgstr "Fjarlægja"
 
 #: templates/comments/deleted.html:4
-#, fuzzy
 msgid "Thanks for removing"
-msgstr "Takk fyrir að nota vefinn okkar!"
+msgstr "Takk fyrir að fjarlægja"
 
 #: templates/comments/flag.html:4
 msgid "Flag this comment"
-msgstr ""
+msgstr "Flagga athugasemd"
 
 #: templates/comments/flag.html:7
 msgid "Really flag this comment?"
-msgstr ""
+msgstr "Flagga þesa athugasemd?"
 
 #: templates/comments/flag.html:12
 msgid "Flag"
-msgstr ""
+msgstr "Flagg"
 
 #: templates/comments/flagged.html:4
-#, fuzzy
 msgid "Thanks for flagging"
-msgstr "Takk fyrir að nota vefinn okkar!"
+msgstr "Takk fyrir að flagga"
 
 #: templates/comments/form.html:17 templates/comments/preview.html:32
-#, fuzzy
 msgid "Post"
-msgstr "."
+msgstr "Birta"
 
 #: templates/comments/form.html:18 templates/comments/preview.html:33
-#, fuzzy
 msgid "Preview"
-msgstr "skoða:"
+msgstr "Skoða"
 
 #: templates/comments/posted.html:4
-#, fuzzy
 msgid "Thanks for commenting"
-msgstr "frjáls athugasemd"
+msgstr "Takk fyrir að senda athugasemd"
 
 #: templates/comments/posted.html:7
 msgid "Thank you for your comment"
-msgstr ""
+msgstr "Takk fyrir athugasemdina"
 
 #: templates/comments/preview.html:4 templates/comments/preview.html.py:13
-#, fuzzy
 msgid "Preview your comment"
-msgstr "Forskoða athugasemd"
+msgstr "Skoða athugasemd"
 
 #: templates/comments/preview.html:11
-#, fuzzy
 msgid "Please correct the error below"
 msgid_plural "Please correct the errors below"
-msgstr[0] "Vinsamlegast leiðréttu villuna hér að neðan:"
-msgstr[1] "Vinsamlegast leiðréttu villurnar hér að neðan:"
+msgstr[0] "Vinsamlegast lagfærðu villuna fyrir neðan"
+msgstr[1] "Vinsamlegast lagfærðu villurnar fyrir neðan"
 
 #: templates/comments/preview.html:16
 msgid "and"
 msgstr "og"
 
 #: templates/comments/preview.html:16
-#, fuzzy
 msgid "Post your comment"
-msgstr "Forskoða athugasemd"
+msgstr "Birta athugasemd"
 
 #: templates/comments/preview.html:16
-#, fuzzy
 msgid "or make changes"
-msgstr "Engum reitum breytt."
+msgstr "eða breyta"

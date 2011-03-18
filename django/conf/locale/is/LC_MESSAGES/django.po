@@ -1,373 +1,382 @@
-# Icelandic translation of Django.
 # This file is distributed under the same license as the Django package.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-21 22:58+0100\n"
-"PO-Revision-Date: 2008-09-09 16:34-0000\n"
-"Last-Translator: Jökull Sólberg Auðunsson <jokullsolberg@gmail.com>\n"
-"Language-Team:  <dagurp@gmail.com>\n"
+"POT-Creation-Date: 2011-03-15 13:09-0400\n"
+"PO-Revision-Date: 2011-03-04 18:40+0000\n"
+"Last-Translator: haffi67 <haffi67@gmail.com>\n"
+"Language-Team: Icelandic <None>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
+"Language: is\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: conf/global_settings.py:44
 msgid "Arabic"
 msgstr "Arabíska"
 
 #: conf/global_settings.py:45
+msgid "Azerbaijani"
+msgstr "Aserbaídsjíska"
+
+#: conf/global_settings.py:46
 msgid "Bulgarian"
 msgstr "Búlgarska"
 
-#: conf/global_settings.py:46
+#: conf/global_settings.py:47
 msgid "Bengali"
 msgstr "Bengalska"
 
-#: conf/global_settings.py:47
-#, fuzzy
-msgid "Bosnian"
-msgstr "Eistland"
-
 #: conf/global_settings.py:48
-msgid "Catalan"
-msgstr ""
+msgid "Bosnian"
+msgstr "Bosníska"
 
 #: conf/global_settings.py:49
+msgid "Catalan"
+msgstr "Katalónska"
+
+#: conf/global_settings.py:50
 msgid "Czech"
 msgstr "Tékkneska"
 
-#: conf/global_settings.py:50
+#: conf/global_settings.py:51
 msgid "Welsh"
 msgstr "Velska"
 
-#: conf/global_settings.py:51
+#: conf/global_settings.py:52
 msgid "Danish"
 msgstr "Danska"
 
-#: conf/global_settings.py:52
+#: conf/global_settings.py:53
 msgid "German"
 msgstr "Þýska"
 
-#: conf/global_settings.py:53
+#: conf/global_settings.py:54
 msgid "Greek"
 msgstr "Gríska"
 
-#: conf/global_settings.py:54
+#: conf/global_settings.py:55
 msgid "English"
 msgstr "Enska"
 
-#: conf/global_settings.py:55
-#, fuzzy
-msgid "British English"
-msgstr "Enska"
-
 #: conf/global_settings.py:56
+msgid "British English"
+msgstr "Bresk enska"
+
+#: conf/global_settings.py:57
 msgid "Spanish"
 msgstr "Spænska"
 
-#: conf/global_settings.py:57
-#, fuzzy
-msgid "Argentinian Spanish"
-msgstr "Argentínsk Spænska"
-
 #: conf/global_settings.py:58
+msgid "Argentinian Spanish"
+msgstr "Argentínsk spænska"
+
+#: conf/global_settings.py:59
+msgid "Mexican Spanish"
+msgstr "Mexíkósk Spænska"
+
+#: conf/global_settings.py:60
 msgid "Estonian"
 msgstr "Eistland"
 
-#: conf/global_settings.py:59
-msgid "Basque"
-msgstr ""
-
-#: conf/global_settings.py:60
-msgid "Persian"
-msgstr ""
-
 #: conf/global_settings.py:61
+msgid "Basque"
+msgstr "Baskneska"
+
+#: conf/global_settings.py:62
+msgid "Persian"
+msgstr "Persneska"
+
+#: conf/global_settings.py:63
 msgid "Finnish"
 msgstr "Finnska"
 
-#: conf/global_settings.py:62
+#: conf/global_settings.py:64
 msgid "French"
 msgstr "Franska"
 
-#: conf/global_settings.py:63
-#, fuzzy
-msgid "Frisian"
-msgstr "Brasilíska"
-
-#: conf/global_settings.py:64
-msgid "Irish"
-msgstr ""
-
 #: conf/global_settings.py:65
+msgid "Frisian"
+msgstr "Frísneska"
+
+#: conf/global_settings.py:66
+msgid "Irish"
+msgstr "Írska"
+
+#: conf/global_settings.py:67
 msgid "Galician"
 msgstr "Galíska"
 
-#: conf/global_settings.py:66
+#: conf/global_settings.py:68
 msgid "Hebrew"
 msgstr "Hebreska"
 
-#: conf/global_settings.py:67
-msgid "Hindi"
-msgstr ""
-
-#: conf/global_settings.py:68
-msgid "Croatian"
-msgstr ""
-
 #: conf/global_settings.py:69
+msgid "Hindi"
+msgstr "Hindí"
+
+#: conf/global_settings.py:70
+msgid "Croatian"
+msgstr "Króatíska"
+
+#: conf/global_settings.py:71
 msgid "Hungarian"
 msgstr "Ungverska"
 
-#: conf/global_settings.py:70
+#: conf/global_settings.py:72
 msgid "Indonesian"
-msgstr ""
+msgstr "Indónesíska"
 
-#: conf/global_settings.py:71
+#: conf/global_settings.py:73
 msgid "Icelandic"
 msgstr "Íslenska"
 
-#: conf/global_settings.py:72
+#: conf/global_settings.py:74
 msgid "Italian"
 msgstr "Ítalska"
 
-#: conf/global_settings.py:73
+#: conf/global_settings.py:75
 msgid "Japanese"
 msgstr "Japanska"
 
-#: conf/global_settings.py:74
-msgid "Georgian"
-msgstr ""
-
-#: conf/global_settings.py:75
-msgid "Khmer"
-msgstr ""
-
 #: conf/global_settings.py:76
-msgid "Kannada"
-msgstr ""
+msgid "Georgian"
+msgstr "Georgíska"
 
 #: conf/global_settings.py:77
-msgid "Korean"
-msgstr ""
+msgid "Khmer"
+msgstr "Kmeríska"
 
 #: conf/global_settings.py:78
-msgid "Lithuanian"
-msgstr ""
+msgid "Kannada"
+msgstr "Kannadanska"
 
 #: conf/global_settings.py:79
-msgid "Latvian"
-msgstr ""
+msgid "Korean"
+msgstr "Kóreska"
 
 #: conf/global_settings.py:80
-msgid "Macedonian"
-msgstr ""
+msgid "Lithuanian"
+msgstr "Litháenska"
 
 #: conf/global_settings.py:81
-msgid "Malayalam"
-msgstr ""
+msgid "Latvian"
+msgstr "Lettneska"
 
 #: conf/global_settings.py:82
-msgid "Mongolian"
-msgstr ""
+msgid "Macedonian"
+msgstr "Makedónska"
 
 #: conf/global_settings.py:83
+msgid "Malayalam"
+msgstr "Malajalamska"
+
+#: conf/global_settings.py:84
+msgid "Mongolian"
+msgstr "Mongólska"
+
+#: conf/global_settings.py:85
 msgid "Dutch"
 msgstr "Hollenska"
 
-#: conf/global_settings.py:84
+#: conf/global_settings.py:86
 msgid "Norwegian"
 msgstr "Norska"
 
-#: conf/global_settings.py:85
-#, fuzzy
-msgid "Norwegian Bokmal"
-msgstr "Norska"
-
-#: conf/global_settings.py:86
-#, fuzzy
-msgid "Norwegian Nynorsk"
-msgstr "Norska"
-
 #: conf/global_settings.py:87
-msgid "Punjabi"
-msgstr ""
+msgid "Norwegian Bokmal"
+msgstr "Norska bókmál"
 
 #: conf/global_settings.py:88
-msgid "Polish"
-msgstr ""
+msgid "Norwegian Nynorsk"
+msgstr "Nýnorska"
 
 #: conf/global_settings.py:89
-#, fuzzy
+msgid "Punjabi"
+msgstr "Púndjabíska"
+
+#: conf/global_settings.py:90
+msgid "Polish"
+msgstr "Pólska"
+
+#: conf/global_settings.py:91
 msgid "Portuguese"
 msgstr "Portúgalska"
 
-#: conf/global_settings.py:90
+#: conf/global_settings.py:92
 msgid "Brazilian Portuguese"
 msgstr "Brasilísk Portúgalska"
 
-#: conf/global_settings.py:91
+#: conf/global_settings.py:93
 msgid "Romanian"
 msgstr "Rúmenska"
 
-#: conf/global_settings.py:92
+#: conf/global_settings.py:94
 msgid "Russian"
 msgstr "Rússneska"
 
-#: conf/global_settings.py:93
+#: conf/global_settings.py:95
 msgid "Slovak"
 msgstr "Slóvaska"
 
-#: conf/global_settings.py:94
-msgid "Slovenian"
-msgstr ""
-
-#: conf/global_settings.py:95
-#, fuzzy
-msgid "Albanian"
-msgstr "Rúmenska"
-
 #: conf/global_settings.py:96
+msgid "Slovenian"
+msgstr "Slóvenska"
+
+#: conf/global_settings.py:97
+msgid "Albanian"
+msgstr "Albanska"
+
+#: conf/global_settings.py:98
 msgid "Serbian"
 msgstr "Serbneska"
 
-#: conf/global_settings.py:97
-#, fuzzy
+#: conf/global_settings.py:99
 msgid "Serbian Latin"
-msgstr "Serbneska"
+msgstr "Serbnesk latína"
 
-#: conf/global_settings.py:98
+#: conf/global_settings.py:100
 msgid "Swedish"
 msgstr "Sænska"
 
-#: conf/global_settings.py:99
-msgid "Tamil"
-msgstr ""
-
-#: conf/global_settings.py:100
-msgid "Telugu"
-msgstr ""
-
 #: conf/global_settings.py:101
-msgid "Thai"
-msgstr ""
+msgid "Tamil"
+msgstr "Tamílska"
 
 #: conf/global_settings.py:102
-msgid "Turkish"
-msgstr ""
+msgid "Telugu"
+msgstr "Telúgúska"
 
 #: conf/global_settings.py:103
-msgid "Ukrainian"
-msgstr ""
+msgid "Thai"
+msgstr "Tælenska"
 
 #: conf/global_settings.py:104
-#, fuzzy
-msgid "Vietnamese"
-msgstr "skírnarnafn"
+msgid "Turkish"
+msgstr "Tyrkneska"
 
 #: conf/global_settings.py:105
-msgid "Simplified Chinese"
-msgstr "Einfölduð Kínverska "
+msgid "Ukrainian"
+msgstr "Úkraínska"
 
 #: conf/global_settings.py:106
-msgid "Traditional Chinese"
-msgstr "Hefðbundin Kínverska"
+msgid "Urdu"
+msgstr "Úrdú"
 
-#: core/validators.py:20 forms/fields.py:67
+#: conf/global_settings.py:107
+msgid "Vietnamese"
+msgstr "Víetnamska"
+
+#: conf/global_settings.py:108
+msgid "Simplified Chinese"
+msgstr "Einfölduð kínverska "
+
+#: conf/global_settings.py:109
+msgid "Traditional Chinese"
+msgstr "Hefðbundin kínverska"
+
+#: core/validators.py:21 forms/fields.py:67
 msgid "Enter a valid value."
 msgstr "Sláðu inn gilt gildi."
-
-#: core/validators.py:87 forms/fields.py:574
-msgid "Enter a valid URL."
-msgstr "Sláðu inn gilt veffang (URL)."
 
 #: core/validators.py:89 forms/fields.py:575
 msgid "This URL appears to be a broken link."
 msgstr "Síðan á þessari slóð lítur út fyrir að skila villu."
 
-#: core/validators.py:120 forms/fields.py:449
+#: core/validators.py:94 forms/fields.py:574
+msgid "Enter a valid URL."
+msgstr "Sláðu inn gilt veffang (URL)."
+
+#: core/validators.py:138 forms/fields.py:449
 msgid "Enter a valid e-mail address."
 msgstr "Sláðu inn gilt tölvupóstfang."
 
-#: core/validators.py:123 forms/fields.py:958
+#: core/validators.py:141 forms/fields.py:958
 msgid ""
 "Enter a valid 'slug' consisting of letters, numbers, underscores or hyphens."
 msgstr ""
 "Settu inn gildan vefslóðartitil sem samanstendur af latneskum bókstöfum, "
 "númerin, undirstrikum og bandstrikum."
 
-#: core/validators.py:126 forms/fields.py:951
+#: core/validators.py:144 forms/fields.py:951
 msgid "Enter a valid IPv4 address."
 msgstr "Sláðu inn gilda IPv4 tölu."
 
-#: core/validators.py:129 db/models/fields/__init__.py:575
+#: core/validators.py:147 db/models/fields/__init__.py:575
 msgid "Enter only digits separated by commas."
 msgstr "Skrifaðu einungis tölur aðskildar með kommum."
 
-#: core/validators.py:135
-#, fuzzy, python-format
+#: core/validators.py:153
+#, python-format
 msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
-msgstr "Gildið má ekki hafa færri en %(min)d stafi (gildið hefur %(length)d)."
+msgstr ""
+"Gakktu úr skugga um að gildi sé %(limit_value)s (það er %(show_value)s)."
 
-#: core/validators.py:153 forms/fields.py:222 forms/fields.py:275
-#, fuzzy, python-format
+#: core/validators.py:171 forms/fields.py:222 forms/fields.py:275
+#, python-format
 msgid "Ensure this value is less than or equal to %(limit_value)s."
-msgstr "Gakktu úr skuggum um að gildið sé minna en eða jafn og %s."
+msgstr ""
+"Gakktu úr skugga um að gildið sé minna en eða jafnt og %(limit_value)s."
 
-#: core/validators.py:158 forms/fields.py:223 forms/fields.py:276
-#, fuzzy, python-format
+#: core/validators.py:176 forms/fields.py:223 forms/fields.py:276
+#, python-format
 msgid "Ensure this value is greater than or equal to %(limit_value)s."
-msgstr "Gildið þarf að vera jafnt og eða hærra en %s."
+msgstr ""
+"Gakktu úr skugga um að gildið sé stærra en eða jafnt og %(limit_value)s."
 
-#: core/validators.py:164
-#, fuzzy, python-format
+#: core/validators.py:182
+#, python-format
 msgid ""
 "Ensure this value has at least %(limit_value)d characters (it has %"
 "(show_value)d)."
-msgstr "Gildið má ekki hafa færri en %(min)d stafi (gildið hefur %(length)d)."
+msgstr ""
+"Gakktu úr skugga um að þetta gildi hafi a.m.k. %(limit_value)d stafi (it has "
+"%(show_value)d)."
 
-#: core/validators.py:170
-#, fuzzy, python-format
+#: core/validators.py:188
+#, python-format
 msgid ""
 "Ensure this value has at most %(limit_value)d characters (it has %"
 "(show_value)d)."
-msgstr "Gildið má ekki hafa fleiri en %(max)d stafi (gildið hefur %(length)d)."
+msgstr ""
+"Gakktu úr skugga um að þetta gildi hafi í mesta lagi %(limit_value)d stafi "
+"(it has %(show_value)d)."
 
-#: db/models/base.py:767
-#, fuzzy, python-format
+#: db/models/base.py:769
+#, python-format
 msgid "%(field_name)s must be unique for %(date_field)s %(lookup)s."
-msgstr "Þessi reitur þarf að vera útfylltur ef %(field)s er %(value)s"
+msgstr ""
+"%(field_name)s verður að vera einkvæmt fyrir %(date_field)s %(lookup)s."
 
-#: db/models/base.py:782 db/models/base.py:790
+#: db/models/base.py:784 db/models/base.py:792
 #, python-format
 msgid "%(model_name)s with this %(field_label)s already exists."
 msgstr "%(model_name)s með þetta %(field_label)s er nú þegar til."
 
-#: db/models/base.py:789 forms/models.py:581
+#: db/models/base.py:791 forms/models.py:562
 msgid "and"
 msgstr "og"
 
 #: db/models/fields/__init__.py:63
 #, python-format
 msgid "Value %r is not a valid choice."
-msgstr ""
+msgstr "Gildið %r er ógilt."
 
 #: db/models/fields/__init__.py:64
 msgid "This field cannot be null."
 msgstr "Þessi reitur getur ekki haft tómgildi (null)."
 
 #: db/models/fields/__init__.py:65
-#, fuzzy
 msgid "This field cannot be blank."
-msgstr "Þessi reitur getur ekki haft tómgildi (null)."
+msgstr "Þessi reitur má ekki vera tómur."
 
 #: db/models/fields/__init__.py:70
 #, python-format
 msgid "Field of type: %(field_type)s"
-msgstr ""
+msgstr "Reitur af gerð: %(field_type)s"
 
 #: db/models/fields/__init__.py:451 db/models/fields/__init__.py:871
 #: db/models/fields/__init__.py:980 db/models/fields/__init__.py:991
@@ -381,7 +390,7 @@ msgstr "Þetta gildi verður að vera heil tala."
 
 #: db/models/fields/__init__.py:493
 msgid "This value must be either True or False."
-msgstr "Þetta gildi verður að vera True eða False."
+msgstr "Þetta gildi verður að vera Satt eða Ósatt."
 
 #: db/models/fields/__init__.py:495
 msgid "Boolean (Either True or False)"
@@ -394,7 +403,7 @@ msgstr "Strengur (mest %(max_length)s)"
 
 #: db/models/fields/__init__.py:570
 msgid "Comma-separated integers"
-msgstr "Kommuaðgreindar heiltölur"
+msgstr "Heiltölur aðgreindar með kommum"
 
 #: db/models/fields/__init__.py:584
 msgid "Date (without time)"
@@ -431,22 +440,21 @@ msgid "E-mail address"
 msgstr "Tölvupóstfang"
 
 #: db/models/fields/__init__.py:818 db/models/fields/files.py:220
-#: db/models/fields/files.py:339
+#: db/models/fields/files.py:326
 msgid "File path"
 msgstr "Skjalaslóð"
 
 #: db/models/fields/__init__.py:841
-#, fuzzy
 msgid "This value must be a float."
-msgstr "Þetta gildi verður að vera að minnsta kosti  %s."
+msgstr "Þetta gildi verður að vera fleytitala"
 
 #: db/models/fields/__init__.py:843
 msgid "Floating point number"
-msgstr "Hlaupakommutala (floating point number)"
+msgstr "Fleytitala (floating point number)"
 
 #: db/models/fields/__init__.py:902
 msgid "Big (8 byte) integer"
-msgstr ""
+msgstr "Stór (8 bæta) heiltala"
 
 #: db/models/fields/__init__.py:915
 msgid "IP address"
@@ -480,24 +488,24 @@ msgstr "Veffang"
 msgid "XML text"
 msgstr "XML texti"
 
-#: db/models/fields/related.py:804
+#: db/models/fields/related.py:815
 #, python-format
 msgid "Model %(model)s with pk %(pk)r does not exist."
-msgstr ""
+msgstr "Módel %(model)s með lykil %(pk)r er ekki til."
 
-#: db/models/fields/related.py:806
+#: db/models/fields/related.py:817
 msgid "Foreign Key (type determined by related field)"
-msgstr ""
+msgstr "Ytri lykill (Gerð ákveðin af skyldum reit)"
 
-#: db/models/fields/related.py:928
+#: db/models/fields/related.py:941
 msgid "One-to-one relationship"
-msgstr ""
+msgstr "Einn-á-einn samband."
 
-#: db/models/fields/related.py:990
+#: db/models/fields/related.py:1003
 msgid "Many-to-many relationship"
-msgstr ""
+msgstr "Margir-til-margra samband."
 
-#: db/models/fields/related.py:1010
+#: db/models/fields/related.py:1023
 msgid ""
 "Hold down \"Control\", or \"Command\" on a Mac, to select more than one."
 msgstr ""
@@ -555,14 +563,14 @@ msgid "The submitted file is empty."
 msgstr "Innsend skrá er tóm."
 
 #: forms/fields.py:463
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Ensure this filename has at most %(max)d characters (it has %(length)d)."
 msgstr "Gildið má ekki hafa fleiri en %(max)d stafi (gildið hefur %(length)d)."
 
 #: forms/fields.py:464
 msgid "Please either submit a file or check the clear checkbox, not both."
-msgstr ""
+msgstr "Vinsamlegast sendu annað hvort inn skrá eða merktu í boxið, ekki bæði."
 
 #: forms/fields.py:518
 msgid ""
@@ -578,62 +586,63 @@ msgid "Select a valid choice. %(value)s is not one of the available choices."
 msgstr ""
 "Veldu gildan valmöguleika. %(value)s er ekki eitt af gildum valmöguleikum."
 
-#: forms/fields.py:726 forms/fields.py:814 forms/models.py:1018
+#: forms/fields.py:726 forms/fields.py:814 forms/models.py:985
 msgid "Enter a list of values."
 msgstr "Sláðu inn lista af gildum."
 
-#: forms/formsets.py:308 forms/formsets.py:310
+#: forms/formsets.py:305 forms/formsets.py:307
 msgid "Order"
 msgstr "Röð"
 
-#: forms/formsets.py:312
+#: forms/formsets.py:309
 msgid "Delete"
 msgstr "Eyða"
 
-#: forms/models.py:575
-#, fuzzy, python-format
+#: forms/models.py:556
+#, python-format
 msgid "Please correct the duplicate data for %(field)s."
-msgstr "Vinsamlegast leiðréttu villuna hér að neðan:"
+msgstr "Vinsamlegast leiðréttu tvítekin gögn í reit %(field)s."
 
-#: forms/models.py:579
+#: forms/models.py:560
 #, python-format
 msgid "Please correct the duplicate data for %(field)s, which must be unique."
 msgstr ""
+"Vinsamlegast lagfærðu gögn í reit %(field)s, sem verða að vera einstök."
 
-#: forms/models.py:585
+#: forms/models.py:566
 #, python-format
 msgid ""
 "Please correct the duplicate data for %(field_name)s which must be unique "
 "for the %(lookup)s in %(date_field)s."
 msgstr ""
+"Vinsamlegast leiðréttu tvítekin gögn í reit %(field_name)s sem verða að vera "
+"einstök fyrir %(lookup)s í %(date_field)s."
 
-#: forms/models.py:593
-#, fuzzy
+#: forms/models.py:574
 msgid "Please correct the duplicate values below."
-msgstr "Vinsamlegast leiðréttu villuna hér að neðan:"
+msgstr "Vinsamlegast lagfærðu tvítöldu gögnin fyrir neðan."
 
-#: forms/models.py:868
+#: forms/models.py:835
 msgid "The inline foreign key did not match the parent instance primary key."
-msgstr ""
+msgstr "Ytri lykill virðist ekki passa við aðallykil eiganda."
 
-#: forms/models.py:929
+#: forms/models.py:896
 msgid "Select a valid choice. That choice is not one of the available choices."
 msgstr ""
 "Veldu gildan valmöguleika. Valið virðist ekki vera eitt af gildum "
 "valmöguleikum."
 
-#: forms/models.py:1019
+#: forms/models.py:986
 #, python-format
 msgid "Select a valid choice. %s is not one of the available choices."
 msgstr "Veldu gildan valmöguleika. %s er ekki einn af gildum valmöguleikum."
 
-#: forms/models.py:1021
+#: forms/models.py:988
 #, python-format
 msgid "\"%s\" is not a valid value for a primary key."
-msgstr ""
+msgstr "\"%s\" er ekki gilt sem lykill."
 
 #: forms/widgets.py:299
-#, fuzzy
 msgid "Currently"
 msgstr "Eins og er:"
 
@@ -642,57 +651,56 @@ msgid "Change"
 msgstr "Breyta"
 
 #: forms/widgets.py:301
-#, fuzzy
 msgid "Clear"
-msgstr "ár"
+msgstr "Hreinsa"
 
-#: forms/widgets.py:547
+#: forms/widgets.py:548
 msgid "Unknown"
 msgstr "Óþekkt"
 
-#: forms/widgets.py:547
+#: forms/widgets.py:548
 msgid "Yes"
 msgstr "Já"
 
-#: forms/widgets.py:547
+#: forms/widgets.py:548
 msgid "No"
 msgstr "Nei"
 
-#: template/defaultfilters.py:774
+#: template/defaultfilters.py:777
 msgid "yes,no,maybe"
 msgstr "já,nei,kannski"
 
-#: template/defaultfilters.py:805
+#: template/defaultfilters.py:805 template/defaultfilters.py:810
 #, python-format
 msgid "%(size)d byte"
 msgid_plural "%(size)d bytes"
 msgstr[0] "%(size)d bæti"
 msgstr[1] "%(size)d bæti"
 
-#: template/defaultfilters.py:807
+#: template/defaultfilters.py:812
 #, python-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: template/defaultfilters.py:809
+#: template/defaultfilters.py:814
 #, python-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: template/defaultfilters.py:811
+#: template/defaultfilters.py:816
 #, python-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: template/defaultfilters.py:813
-#, fuzzy, python-format
+#: template/defaultfilters.py:818
+#, python-format
 msgid "%s TB"
-msgstr "%s KB"
+msgstr "%s TB"
 
-#: template/defaultfilters.py:814
-#, fuzzy, python-format
+#: template/defaultfilters.py:819
+#, python-format
 msgid "%s PB"
-msgstr "%s KB"
+msgstr "%s PB"
 
 #: utils/dateformat.py:42
 msgid "p.m."
@@ -873,134 +881,122 @@ msgstr "des"
 #: utils/dates.py:31
 msgctxt "abbrev. month"
 msgid "Jan."
-msgstr "jan."
+msgstr "Jan."
 
 #: utils/dates.py:32
 msgctxt "abbrev. month"
 msgid "Feb."
-msgstr "feb."
+msgstr "Feb."
 
 #: utils/dates.py:33
 msgctxt "abbrev. month"
 msgid "March"
-msgstr "mars"
+msgstr "Mars"
 
 #: utils/dates.py:34
 msgctxt "abbrev. month"
 msgid "April"
-msgstr "apríl"
+msgstr "Apríl"
 
 #: utils/dates.py:35
 msgctxt "abbrev. month"
 msgid "May"
-msgstr "maí"
+msgstr "Maí"
 
 #: utils/dates.py:36
 msgctxt "abbrev. month"
 msgid "June"
-msgstr "júní"
+msgstr "Júní"
 
 #: utils/dates.py:37
 msgctxt "abbrev. month"
 msgid "July"
-msgstr "júlí"
+msgstr "Júlí"
 
 #: utils/dates.py:38
 msgctxt "abbrev. month"
 msgid "Aug."
-msgstr "ág."
+msgstr "Ág."
 
 #: utils/dates.py:39
 msgctxt "abbrev. month"
 msgid "Sept."
-msgstr "sept."
+msgstr "Sept."
 
 #: utils/dates.py:40
 msgctxt "abbrev. month"
 msgid "Oct."
-msgstr "okt."
+msgstr "Okt."
 
 #: utils/dates.py:41
 msgctxt "abbrev. month"
 msgid "Nov."
-msgstr "nóv."
+msgstr "Nóv."
 
 #: utils/dates.py:42
 msgctxt "abbrev. month"
 msgid "Dec."
-msgstr "des."
+msgstr "Des."
 
 #: utils/dates.py:45
-#, fuzzy
 msgctxt "alt. month"
 msgid "January"
-msgstr "janúar"
+msgstr "Janúar"
 
 #: utils/dates.py:46
-#, fuzzy
 msgctxt "alt. month"
 msgid "February"
-msgstr "febrúar"
+msgstr "Febrúar"
 
 #: utils/dates.py:47
-#, fuzzy
 msgctxt "alt. month"
 msgid "March"
-msgstr "mars"
+msgstr "Mars"
 
 #: utils/dates.py:48
-#, fuzzy
 msgctxt "alt. month"
 msgid "April"
-msgstr "apríl"
+msgstr "Apríl"
 
 #: utils/dates.py:49
-#, fuzzy
 msgctxt "alt. month"
 msgid "May"
-msgstr "maí"
+msgstr "Maí"
 
 #: utils/dates.py:50
-#, fuzzy
 msgctxt "alt. month"
 msgid "June"
-msgstr "júní"
+msgstr "Júní"
 
 #: utils/dates.py:51
-#, fuzzy
 msgctxt "alt. month"
 msgid "July"
-msgstr "júlí"
+msgstr "Júlí"
 
 #: utils/dates.py:52
-#, fuzzy
 msgctxt "alt. month"
 msgid "August"
-msgstr "ágúst"
+msgstr "Ágúst"
 
 #: utils/dates.py:53
-#, fuzzy
 msgctxt "alt. month"
 msgid "September"
-msgstr "september"
+msgstr "September"
 
 #: utils/dates.py:54
-#, fuzzy
 msgctxt "alt. month"
 msgid "October"
-msgstr "október"
+msgstr "Október"
 
 #: utils/dates.py:55
-#, fuzzy
 msgctxt "alt. month"
 msgid "November"
-msgstr "nóvember"
+msgstr "Nóvember"
 
 #: utils/dates.py:56
-#, fuzzy
 msgctxt "alt. month"
 msgid "December"
-msgstr "desember"
+msgstr "Desember"
 
 #: utils/text.py:136
 msgid "or"
@@ -1009,7 +1005,7 @@ msgstr "eða"
 #. Translators: This string is used as a separator between list elements
 #: utils/text.py:153
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: utils/timesince.py:21
 msgid "year"
@@ -1061,23 +1057,23 @@ msgstr "%(number)d %(type)s"
 msgid ", %(number)d %(type)s"
 msgstr ", %(number)d %(type)s"
 
-#: utils/translation/trans_real.py:562
+#: utils/translation/trans_real.py:568
 msgid "DATE_FORMAT"
 msgstr "j. N Y"
 
-#: utils/translation/trans_real.py:563
+#: utils/translation/trans_real.py:569
 msgid "DATETIME_FORMAT"
 msgstr "j. N Y, H:i"
 
-#: utils/translation/trans_real.py:564
+#: utils/translation/trans_real.py:570
 msgid "TIME_FORMAT"
 msgstr "H:i"
 
-#: utils/translation/trans_real.py:585
+#: utils/translation/trans_real.py:591
 msgid "YEAR_MONTH_FORMAT"
 msgstr "j. N Y"
 
-#: utils/translation/trans_real.py:586
+#: utils/translation/trans_real.py:592
 msgid "MONTH_DAY_FORMAT"
 msgstr "j. N Y"
 
@@ -1095,3 +1091,57 @@ msgstr "%(verbose_name)s var uppfært."
 #, python-format
 msgid "The %(verbose_name)s was deleted."
 msgstr "%(verbose_name)s var eytt."
+
+#: views/generic/dates.py:33
+msgid "No year specified"
+msgstr "Ekkert ár tilgreint"
+
+#: views/generic/dates.py:58
+msgid "No month specified"
+msgstr "Enginn mánuður tilgreindur"
+
+#: views/generic/dates.py:99
+msgid "No day specified"
+msgstr "Enginn dagur tilgreindur"
+
+#: views/generic/dates.py:138
+msgid "No week specified"
+msgstr "Engin vika tilgreind"
+
+#: views/generic/dates.py:198 views/generic/dates.py:214
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr "Ekkert %(verbose_name_plural)s í boði."
+
+#: views/generic/dates.py:466
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
+msgstr ""
+"Framtíðar %(verbose_name_plural)s ekki í boði því %(class_name)s."
+"allow_future er Ósatt."
+
+#: views/generic/dates.py:500
+#, python-format
+msgid "Invalid date string '%(datestr)s' given format '%(format)s'"
+msgstr "Ógilt snið dagsetningar \"%(datestr)s\" gefið sniðið \"%(format)s\""
+
+#: views/generic/detail.py:51
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr "Ekkert %(verbose_name)s sem uppfyllir skilyrði"
+
+#: views/generic/list.py:47
+msgid "Page is not 'last', nor can it be converted to an int."
+msgstr "Þetta er hvorki síðasta síða, né er hægt að breyta í heiltölu."
+
+#: views/generic/list.py:52
+#, python-format
+msgid "Invalid page (%(page_number)s)"
+msgstr "Ógild síða (%(page_number)s)"
+
+#: views/generic/list.py:119
+#, python-format
+msgid "Empty list and '%(class_name)s.allow_empty' is False."
+msgstr "Tómur listi og '%(class_name)s.allow_empty er Ósatt."

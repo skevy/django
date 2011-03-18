@@ -252,13 +252,13 @@ class BasePersonModelFormSet(BaseModelFormSet):
             person = person_dict.get('id')
             alive = person_dict.get('alive')
             if person and alive and person.name == "Grace Hopper":
-                raise forms.ValidationError, "Grace is not a Zombie"
+                raise forms.ValidationError("Grace is not a Zombie")
 
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('name', 'gender', 'alive')
     list_editable = ('gender', 'alive')
     list_filter = ('gender',)
-    search_fields = (u'name',)
+    search_fields = ('^name',)
     ordering = ["id"]
     save_as = True
 
@@ -445,7 +445,7 @@ class Recommendation(Title):
     recommender = models.ForeignKey(Recommender)
 
 class RecommendationAdmin(admin.ModelAdmin):
-    search_fields = ('titletranslation__text', 'recommender__titletranslation__text',)
+    search_fields = ('=titletranslation__text', '=recommender__titletranslation__text',)
 
 class Collector(models.Model):
     name = models.CharField(max_length=100)
@@ -710,7 +710,7 @@ class Paper(models.Model):
 
 class CoverLetter(models.Model):
     author = models.CharField(max_length=30)
-    date = models.DateField(null=True, blank=True)
+    date_written = models.DateField(null=True, blank=True)
 
     def __unicode__(self):
         return self.author
@@ -733,8 +733,30 @@ class CoverLetterAdmin(admin.ModelAdmin):
 
     def queryset(self, request):
         #return super(CoverLetterAdmin, self).queryset(request).only('author')
-        return super(CoverLetterAdmin, self).queryset(request).defer('date')
+        return super(CoverLetterAdmin, self).queryset(request).defer('date_written')
 
+class Story(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+
+class StoryForm(forms.ModelForm):
+    class Meta:
+        widgets = {'title': forms.HiddenInput}
+
+class StoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'content')
+    list_display_links = ('title',) # 'id' not in list_display_links
+    list_editable = ('content', )
+    form = StoryForm
+
+class OtherStory(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+
+class OtherStoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'content')
+    list_display_links = ('title', 'id') # 'id' in list_display_links
+    list_editable = ('content', )
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(CustomArticle, CustomArticleAdmin)
@@ -776,6 +798,8 @@ admin.site.register(FoodDelivery, FoodDeliveryAdmin)
 admin.site.register(RowLevelChangePermissionModel, RowLevelChangePermissionModelAdmin)
 admin.site.register(Paper, PaperAdmin)
 admin.site.register(CoverLetter, CoverLetterAdmin)
+admin.site.register(Story, StoryAdmin)
+admin.site.register(OtherStory, OtherStoryAdmin)
 
 # We intentionally register Promo and ChapterXtra1 but not Chapter nor ChapterXtra2.
 # That way we cover all four cases:
