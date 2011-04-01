@@ -38,7 +38,7 @@ class Command(NoArgsCommand):
         self.copied_files = []
         self.symlinked_files = []
         self.unmodified_files = []
-        self.storage = get_storage_class(settings.STATICFILES_STORAGE)()
+        self.storage = get_storage_class(settings.STATICFILES_STORAGE)(**settings.STATICFILES_STORAGE_ARGS)
         try:
             self.storage.path('')
         except NotImplementedError:

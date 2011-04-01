@@ -259,6 +259,9 @@ SECRET_KEY = ''
 # Default file storage mechanism that holds media.
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
+# Default file storage init class arguments
+DEFAULT_FILE_STORAGE_ARGS = {}
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = ''
@@ -574,6 +577,9 @@ STATICFILES_DIRS = ()
 
 # The default file storage backend used during the build process
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+# Static file storage backend default init arguments
+STATICFILES_STORAGE_ARGS = {}
 
 # List of finder classes that know how to find static files in
 # various locations.

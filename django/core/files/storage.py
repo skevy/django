@@ -270,6 +270,6 @@ def get_storage_class(import_path=None):
 
 class DefaultStorage(LazyObject):
     def _setup(self):
-        self._wrapped = get_storage_class()()
+        self._wrapped = get_storage_class()(**settings.DEFAULT_FILE_STORAGE_ARGS)
 
 default_storage = DefaultStorage()
