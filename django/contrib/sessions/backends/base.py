@@ -1,4 +1,5 @@
 import base64
+import hashlib
 import os
 import random
 import sys
@@ -11,7 +12,6 @@ except ImportError:
 
 from django.conf import settings
 from django.core.exceptions import SuspiciousOperation
-from django.utils.hashcompat import md5_constructor
 from django.utils.crypto import constant_time_compare, salted_hmac
 
 # Use the system (hardware-based) random number generator if it exists.
@@ -105,24 +105,9 @@ class SessionBase(object):
             else:
                 return pickle.loads(pickled)
         except Exception:
-            # ValueError, SuspiciousOperation, unpickling exceptions
-            # Fall back to Django 1.2 method
-            # PendingDeprecationWarning <- here to remind us to
-            # remove this fallback in Django 1.5
-            try:
-                return self._decode_old(session_data)
-            except Exception:
-                # Unpickling can cause a variety of exceptions. If something happens,
-                # just return an empty dictionary (an empty session).
-                return {}
-
-    def _decode_old(self, session_data):
-        encoded_data = base64.decodestring(session_data)
-        pickled, tamper_check = encoded_data[:-32], encoded_data[-32:]
-        if not constant_time_compare(md5_constructor(pickled + settings.SECRET_KEY).hexdigest(),
-                                     tamper_check):
-            raise SuspiciousOperation("User tampered with session cookie.")
-        return pickle.loads(pickled)
+            # ValueError, SuspiciousOperation, unpickling exceptions. If any of
+            # these happen, just return an empty dictionary (an empty session).
+            return {}
 
     def update(self, dict_):
         self._session.update(dict_)
@@ -161,7 +146,7 @@ class SessionBase(object):
             # No getpid() in Jython, for example
             pid = 1
         while 1:
-            session_key = md5_constructor("%s%s%s%s"
+            session_key = hashlib.md5("%s%s%s%s"
                     % (randrange(0, MAX_SESSION_KEY), pid, time.time(),
                        settings.SECRET_KEY)).hexdigest()
             if not self.exists(session_key):

@@ -28,14 +28,6 @@ class TestForm(forms.Form):
     bool1 = forms.BooleanField(required=False)
 
 
-class UserSecuredFormPreview(TestFormPreview):
-    """
-    FormPreview with a custum security_hash method
-    """
-    def security_hash(self, request, form):
-        return "123"
-
-
 class PreviewTests(TestCase):
     urls = 'django.contrib.formtools.tests.urls'
 
@@ -124,36 +116,36 @@ class PreviewTests(TestCase):
         response = self.client.post('/test1/', self.test_data)
         self.assertEqual(response.content, success_string)
 
-    def test_form_submit_django12_hash(self):
+    def test_form_submit_good_hash(self):
         """
-        Test contrib.formtools.preview form submittal, using the hash function
-        used in Django 1.2
+        Test contrib.formtools.preview form submittal, using a correct
+        hash
         """
         # Pass strings for form submittal and add stage variable to
         # show we previously saw first stage of the form.
         self.test_data.update({'stage':2})
         response = self.client.post('/test1/', self.test_data)
         self.assertNotEqual(response.content, success_string)
-        hash = utils.security_hash(None, TestForm(self.test_data))
+        hash = utils.form_hmac(TestForm(self.test_data))
         self.test_data.update({'hash': hash})
         response = self.client.post('/test1/', self.test_data)
         self.assertEqual(response.content, success_string)
 
 
-    def test_form_submit_django12_hash_custom_hash(self):
+    def test_form_submit_bad_hash(self):
         """
-        Test contrib.formtools.preview form submittal, using the hash function
-        used in Django 1.2 and a custom security_hash method.
+        Test contrib.formtools.preview form submittal does not proceed
+        if the hash is incorrect.
         """
         # Pass strings for form submittal and add stage variable to
         # show we previously saw first stage of the form.
         self.test_data.update({'stage':2})
-        response = self.client.post('/test2/', self.test_data)
+        response = self.client.post('/test1/', self.test_data)
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(response.content, success_string)
-        hash = utils.security_hash(None, TestForm(self.test_data))
+        hash = utils.form_hmac(TestForm(self.test_data)) + "bad"
         self.test_data.update({'hash': hash})
-        response = self.client.post('/test2/', self.test_data)
+        response = self.client.post('/test1/', self.test_data)
         self.assertNotEqual(response.content, success_string)
 
 
@@ -249,14 +241,6 @@ class WizardClass(wizard.FormWizard):
         return http.HttpResponse(success_string)
 
 
-class UserSecuredWizardClass(WizardClass):
-    """
-    Wizard with a custum security_hash method
-    """
-    def security_hash(self, request, form):
-        return "123"
-
-
 class DummyRequest(http.HttpRequest):
 
     def __init__(self, POST=None):
@@ -310,36 +294,7 @@ class WizardTests(TestCase):
                                      "wizard_step": "1"})
         self.assertEqual(0, response.context['step0'])
 
-    def test_good_hash_django12(self):
-        """
-        Form should advance if the hash is present and good, as calculated using
-        django 1.2 method.
-        """
-        # We are hard-coding a hash value here, but that is OK, since we want to
-        # ensure that we don't accidentally change the algorithm.
-        data = {"0-field": "test",
-                "1-field": "test2",
-                "hash_0": "2fdbefd4c0cad51509478fbacddf8b13",
-                "wizard_step": "1"}
-        response = self.client.post('/wizard/', data)
-        self.assertEqual(2, response.context['step0'])
-
-    def test_good_hash_django12_subclass(self):
-        """
-        The Django 1.2 method of calulating hashes should *not* be used as a
-        fallback if the FormWizard subclass has provided their own method
-        of calculating a hash.
-        """
-        # We are hard-coding a hash value here, but that is OK, since we want to
-        # ensure that we don't accidentally change the algorithm.
-        data = {"0-field": "test",
-                "1-field": "test2",
-                "hash_0": "2fdbefd4c0cad51509478fbacddf8b13",
-                "wizard_step": "1"}
-        response = self.client.post('/wizard2/', data)
-        self.assertEqual(0, response.context['step0'])
-
-    def test_good_hash_current(self):
+    def test_good_hash(self):
         """
         Form should advance if the hash is present and good, as calculated using
         current method.

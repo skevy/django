@@ -3,8 +3,12 @@ The md5 and sha modules are deprecated since Python 2.5, replaced by the
 hashlib module containing both hash algorithms. Here, we provide a common
 interface to the md5 and sha constructors, depending on system version.
 """
-
 import sys
+import warnings
+
+warnings.warn("django.utils.hashcompat is deprecated; use hashlib instead",
+              PendingDeprecationWarning)
+
 if sys.version_info >= (2, 5):
     import hashlib
     md5_constructor = hashlib.md5

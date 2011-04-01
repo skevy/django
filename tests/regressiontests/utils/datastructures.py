@@ -1,10 +1,11 @@
 """
 Tests for stuff in django.utils.datastructures.
 """
+
+import copy
 import pickle
 import unittest
 
-from django.utils.copycompat import copy
 from django.utils.datastructures import *
 
 
@@ -213,7 +214,7 @@ class MultiValueDictTests(DatastructuresTestCase):
                           ['Developer', 'Simon', 'Willison'])
 
     def test_copy(self):
-        for copy_func in [copy, lambda d: d.copy()]:
+        for copy_func in [copy.copy, lambda d: d.copy()]:
             d1 = MultiValueDict({
                 "developers": ["Carl", "Fred"]
             })

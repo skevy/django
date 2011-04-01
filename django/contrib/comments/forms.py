@@ -1,6 +1,5 @@
-import time
 import datetime
-
+import time
 from django import forms
 from django.forms.util import ErrorDict
 from django.conf import settings
@@ -8,7 +7,6 @@ from django.contrib.contenttypes.models import ContentType
 from models import Comment
 from django.utils.crypto import salted_hmac, constant_time_compare
 from django.utils.encoding import force_unicode
-from django.utils.hashcompat import sha_constructor
 from django.utils.text import get_text_list
 from django.utils.translation import ungettext, ugettext_lazy as _
 
@@ -48,12 +46,7 @@ class CommentSecurityForm(forms.Form):
         expected_hash = self.generate_security_hash(**security_hash_dict)
         actual_hash = self.cleaned_data["security_hash"]
         if not constant_time_compare(expected_hash, actual_hash):
-            # Fallback to Django 1.2 method for compatibility
-            # PendingDeprecationWarning <- here to remind us to remove this
-            # fallback in Django 1.5
-            expected_hash_old = self._generate_security_hash_old(**security_hash_dict)
-            if not constant_time_compare(expected_hash_old, actual_hash):
-                raise forms.ValidationError("Security hash check failed.")
+            raise forms.ValidationError("Security hash check failed.")
         return actual_hash
 
     def clean_timestamp(self):
@@ -95,12 +88,6 @@ class CommentSecurityForm(forms.Form):
         key_salt = "django.contrib.forms.CommentSecurityForm"
         value = "-".join(info)
         return salted_hmac(key_salt, value).hexdigest()
-
-    def _generate_security_hash_old(self, content_type, object_pk, timestamp):
-        """Generate a (SHA1) security hash from the provided info."""
-        # Django 1.2 compatibility
-        info = (content_type, object_pk, timestamp, settings.SECRET_KEY)
-        return sha_constructor("".join(info)).hexdigest()
 
 class CommentDetailsForm(CommentSecurityForm):
     """

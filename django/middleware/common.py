@@ -1,3 +1,4 @@
+import hashlib
 import re
 
 from django.conf import settings
@@ -5,7 +6,6 @@ from django import http
 from django.core.mail import mail_managers
 from django.utils.http import urlquote
 from django.core import urlresolvers
-from django.utils.hashcompat import md5_constructor
 from django.utils.log import getLogger
 
 logger = getLogger('django.request')
@@ -68,13 +68,13 @@ class CommonMiddleware(object):
                     _is_valid_path("%s/" % request.path_info, urlconf)):
                 new_url[1] = new_url[1] + '/'
                 if settings.DEBUG and request.method == 'POST':
-                    raise RuntimeError, (""
+                    raise RuntimeError((""
                     "You called this URL via POST, but the URL doesn't end "
                     "in a slash and you have APPEND_SLASH set. Django can't "
                     "redirect to the slash URL while maintaining POST data. "
                     "Change your form to point to %s%s (note the trailing "
                     "slash), or set APPEND_SLASH=False in your Django "
-                    "settings.") % (new_url[0], new_url[1])
+                    "settings.") % (new_url[0], new_url[1]))
 
         if new_url == old_url:
             # No redirects required.
@@ -113,7 +113,7 @@ class CommonMiddleware(object):
             if response.has_header('ETag'):
                 etag = response['ETag']
             else:
-                etag = '"%s"' % md5_constructor(response.content).hexdigest()
+                etag = '"%s"' % hashlib.md5(response.content).hexdigest()
             if response.status_code >= 200 and response.status_code < 300 and request.META.get('HTTP_IF_NONE_MATCH') == etag:
                 cookies = response.cookies
                 response = http.HttpResponseNotModified()

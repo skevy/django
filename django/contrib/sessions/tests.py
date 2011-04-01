@@ -1,6 +1,4 @@
-import base64
 from datetime import datetime, timedelta
-import pickle
 import shutil
 import tempfile
 
@@ -15,7 +13,6 @@ from django.core.exceptions import ImproperlyConfigured, SuspiciousOperation
 from django.http import HttpResponse
 from django.test import TestCase, RequestFactory
 from django.utils import unittest
-from django.utils.hashcompat import md5_constructor
 
 
 class SessionTestsMixin(object):
@@ -250,18 +247,6 @@ class SessionTestsMixin(object):
         # Ensure we can decode what we encode
         data = {'a test key': 'a test value'}
         encoded = self.session.encode(data)
-        self.assertEqual(self.session.decode(encoded), data)
-
-    def test_decode_django12(self):
-        # Ensure we can decode values encoded using Django 1.2
-        # Hard code the Django 1.2 method here:
-        def encode(session_dict):
-            pickled = pickle.dumps(session_dict, pickle.HIGHEST_PROTOCOL)
-            pickled_md5 = md5_constructor(pickled + settings.SECRET_KEY).hexdigest()
-            return base64.encodestring(pickled + pickled_md5)
-
-        data = {'a test key': 'a test value'}
-        encoded = encode(data)
         self.assertEqual(self.session.decode(encoded), data)
 
 

@@ -1112,7 +1112,7 @@ class CommandTypes(AdminScriptTestCase):
             self.assertOutput(out, "usage: manage.py subcommand [options] [args]")
         else:
             self.assertOutput(out, "Usage: manage.py subcommand [options] [args]")
-        self.assertOutput(err, "Type 'manage.py help <subcommand>' for help on a specific subcommand.")
+        self.assertOutput(out, "Type 'manage.py help <subcommand>' for help on a specific subcommand.")
 
     def test_short_help(self):
         "-h is handled as a short form of --help"
@@ -1122,7 +1122,7 @@ class CommandTypes(AdminScriptTestCase):
             self.assertOutput(out, "usage: manage.py subcommand [options] [args]")
         else:
             self.assertOutput(out, "Usage: manage.py subcommand [options] [args]")
-        self.assertOutput(err, "Type 'manage.py help <subcommand>' for help on a specific subcommand.")
+        self.assertOutput(out, "Type 'manage.py help <subcommand>' for help on a specific subcommand.")
 
     def test_specific_help(self):
         "--help can be used on a specific command"
