@@ -654,6 +654,39 @@ def add(value, arg):
             return value
 add.is_safe = False
 
+def sub(value, arg):
+    """Adds the arg to the value."""
+    try:
+        return int(value) - int(arg)
+    except (ValueError, TypeError):
+        try:
+            return value - arg
+        except:
+            return value
+sub.is_safe = False
+
+def mul(value, arg):
+    """Adds the arg to the value."""
+    try:
+        return int(value) * int(arg)
+    except (ValueError, TypeError):
+        try:
+            return value * arg
+        except:
+            return value
+mul.is_safe = False
+
+def div(value, arg):
+    """Adds the arg to the value."""
+    try:
+        return int(value) / int(arg)
+    except (ValueError, TypeError):
+        try:
+            return value / arg
+        except:
+            return value
+div.is_safe = False
+
 def get_digit(value, arg):
     """
     Given a whole number, returns the requested digit of it, where 1 is the
@@ -886,6 +919,7 @@ register.filter(default)
 register.filter(default_if_none)
 register.filter(dictsort)
 register.filter(dictsortreversed)
+register.filter(div)
 register.filter(divisibleby)
 register.filter(escape)
 register.filter(escapejs)
@@ -906,6 +940,7 @@ register.filter(linenumbers)
 register.filter(ljust)
 register.filter(lower)
 register.filter(make_list)
+register.filter(mul)
 register.filter(phone2numeric)
 register.filter(pluralize)
 register.filter(pprint)
@@ -918,6 +953,7 @@ register.filter('slice', slice_)
 register.filter(slugify)
 register.filter(stringformat)
 register.filter(striptags)
+register.filter(sub)
 register.filter(time)
 register.filter(timesince)
 register.filter(timeuntil)
