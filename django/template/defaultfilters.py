@@ -687,7 +687,7 @@ def div(value, arg):
             return value
 div.is_safe = False
 
-def floor(value, arg):
+def floor(value):
     try:
         return floor(float(value))
     except (ValueError, TypeError):
