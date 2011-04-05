@@ -1,6 +1,7 @@
 """Default variable filters."""
 
 import re
+import math
 import random as random_module
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from functools import wraps
@@ -687,15 +688,15 @@ def div(value, arg):
             return value
 div.is_safe = False
 
-def floor(value):
+def floor_(value):
     try:
-        return floor(float(value))
+        return math.floor(float(value))
     except (ValueError, TypeError):
         try:
-            return floor(value)
+            return math.floor(value)
         except:
             return value
-floor.is_safe = False
+floor_.is_safe = False
 
 def get_digit(value, arg):
     """
@@ -937,7 +938,7 @@ register.filter(filesizeformat)
 register.filter(first)
 register.filter(fix_ampersands)
 register.filter(floatformat)
-register.filter(floor)
+register.filter('floor', floor_)
 register.filter(force_escape)
 register.filter(get_digit)
 register.filter(iriencode)
