@@ -687,6 +687,16 @@ def div(value, arg):
             return value
 div.is_safe = False
 
+def floor(value, arg):
+    try:
+        return floor(float(value))
+    except (ValueError, TypeError):
+        try:
+            return floor(value)
+        except:
+            return value
+floor.is_safe = False
+
 def get_digit(value, arg):
     """
     Given a whole number, returns the requested digit of it, where 1 is the
@@ -927,6 +937,7 @@ register.filter(filesizeformat)
 register.filter(first)
 register.filter(fix_ampersands)
 register.filter(floatformat)
+register.filter(floor)
 register.filter(force_escape)
 register.filter(get_digit)
 register.filter(iriencode)
