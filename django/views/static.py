@@ -5,6 +5,7 @@ during development, and SHOULD NOT be used in a production setting.
 
 import mimetypes
 import os
+import stat
 import posixpath
 import re
 import urllib
@@ -58,15 +59,16 @@ def serve(request, path, document_root=None, show_indexes=False):
         return HttpResponseNotModified(mimetype=mimetype)
     response = HttpResponse(open(fullpath, 'rb').read(), mimetype=mimetype)
     response["Last-Modified"] = http_date(statobj.st_mtime)
-    response["Content-Length"] = statobj.st_size
+    if stat.S_ISREG(statobj.st_mode):
+        response["Content-Length"] = statobj.st_size
     if encoding:
         response["Content-Encoding"] = encoding
     return response
 
 
 DEFAULT_DIRECTORY_INDEX_TEMPLATE = """
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="en-us" />

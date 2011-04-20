@@ -187,12 +187,6 @@ def activate(language):
     language and installs it as the current translation object for the current
     thread.
     """
-    if isinstance(language, basestring) and language == 'no':
-        warnings.warn(
-            "The use of the language code 'no' is deprecated. "
-            "Please use the 'nb' translation instead.",
-            DeprecationWarning
-        )
     _active.value = translation(language)
 
 def deactivate():
@@ -441,16 +435,16 @@ def templatize(src, origin=None):
     for t in Lexer(src, origin).tokenize():
         if incomment:
             if t.token_type == TOKEN_BLOCK and t.contents == 'endcomment':
-                content = u''.join(comment)
+                content = ''.join(comment)
                 translators_comment_start = None
                 for lineno, line in enumerate(content.splitlines(True)):
                     if line.lstrip().startswith(TRANSLATOR_COMMENT_MARK):
                         translators_comment_start = lineno
                 for lineno, line in enumerate(content.splitlines(True)):
                     if translators_comment_start is not None and lineno >= translators_comment_start:
-                        out.write(u' # %s' % line)
+                        out.write(' # %s' % line)
                     else:
-                        out.write(u' #\n')
+                        out.write(' #\n')
                 incomment = False
                 comment = []
             else:
@@ -551,51 +545,3 @@ def parse_accept_lang_header(lang_string):
         result.append((lang, priority))
     result.sort(key=lambda k: k[1], reverse=True)
     return result
-
-# get_date_formats and get_partial_date_formats aren't used anymore by Django
-# and are kept for backward compatibility.
-# Note, it's also important to keep format names marked for translation.
-# For compatibility we still want to have formats on translation catalogs.
-# That makes template code like {{ my_date|date:_('DATE_FORMAT') }} still work
-def get_date_formats():
-    """
-    Checks whether translation files provide a translation for some technical
-    message ID to store date and time formats. If it doesn't contain one, the
-    formats provided in the settings will be used.
-    """
-    warnings.warn(
-        "'django.utils.translation.get_date_formats' is deprecated. "
-        "Please update your code to use the new i18n aware formatting.",
-        DeprecationWarning
-    )
-    from django.conf import settings
-    date_format = ugettext('DATE_FORMAT')
-    datetime_format = ugettext('DATETIME_FORMAT')
-    time_format = ugettext('TIME_FORMAT')
-    if date_format == 'DATE_FORMAT':
-        date_format = settings.DATE_FORMAT
-    if datetime_format == 'DATETIME_FORMAT':
-        datetime_format = settings.DATETIME_FORMAT
-    if time_format == 'TIME_FORMAT':
-        time_format = settings.TIME_FORMAT
-    return date_format, datetime_format, time_format
-
-def get_partial_date_formats():
-    """
-    Checks whether translation files provide a translation for some technical
-    message ID to store partial date formats. If it doesn't contain one, the
-    formats provided in the settings will be used.
-    """
-    warnings.warn(
-        "'django.utils.translation.get_partial_date_formats' is deprecated. "
-        "Please update your code to use the new i18n aware formatting.",
-        DeprecationWarning
-    )
-    from django.conf import settings
-    year_month_format = ugettext('YEAR_MONTH_FORMAT')
-    month_day_format = ugettext('MONTH_DAY_FORMAT')
-    if year_month_format == 'YEAR_MONTH_FORMAT':
-        year_month_format = settings.YEAR_MONTH_FORMAT
-    if month_day_format == 'MONTH_DAY_FORMAT':
-        month_day_format = settings.MONTH_DAY_FORMAT
-    return year_month_format, month_day_format

@@ -5,7 +5,7 @@ import datetime
 from django.core.management.color import no_style
 from django.db import backend, connection, connections, DEFAULT_DB_ALIAS, IntegrityError
 from django.db.backends.signals import connection_created
-from django.db.backends.postgresql import version as pg_version
+from django.db.backends.postgresql_psycopg2 import version as pg_version
 from django.test import TestCase, skipUnlessDBFeature, TransactionTestCase
 from django.utils import unittest
 
@@ -231,6 +231,12 @@ class BackendTestCase(TestCase):
         self.assertEqual(cursor.fetchone(), (u'Clark', u'Kent'))
         self.assertEqual(list(cursor.fetchmany(2)), [(u'Jane', u'Doe'), (u'John', u'Doe')])
         self.assertEqual(list(cursor.fetchall()), [(u'Mary', u'Agnelline'), (u'Peter', u'Parker')])
+
+    def test_database_operations_helper_class(self):
+        # Ticket #13630
+        self.assertTrue(hasattr(connection, 'ops'))
+        self.assertTrue(hasattr(connection.ops, 'connection'))
+        self.assertEqual(connection, connection.ops.connection)
 
 
 # We don't make these tests conditional because that means we would need to

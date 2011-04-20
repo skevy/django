@@ -88,21 +88,14 @@ class ExceptionReporter(object):
             self.loader_debug_info = []
             for loader in template_source_loaders:
                 try:
-                    module = import_module(loader.__module__)
-                    if hasattr(loader, '__class__'):
-                        source_list_func = loader.get_template_sources
-                    else: # NOTE: Remember to remove this branch when we deprecate old template loaders in 1.4
-                        source_list_func = module.get_template_sources
+                    source_list_func = loader.get_template_sources
                     # NOTE: This assumes exc_value is the name of the template that
                     # the loader attempted to load.
                     template_list = [{'name': t, 'exists': os.path.exists(t)} \
                         for t in source_list_func(str(self.exc_value))]
-                except (ImportError, AttributeError):
+                except AttributeError:
                     template_list = []
-                if hasattr(loader, '__class__'):
-                    loader_name = loader.__module__ + '.' + loader.__class__.__name__
-                else: # NOTE: Remember to remove this branch when we deprecate old template loaders in 1.4
-                    loader_name = loader.__module__ + '.' + loader.__name__
+                loader_name = loader.__module__ + '.' + loader.__class__.__name__
                 self.loader_debug_info.append({
                     'loader': loader_name,
                     'templates': template_list,
@@ -311,7 +304,7 @@ def empty_urlconf(request):
 #
 
 TECHNICAL_500_TEMPLATE = """
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -770,7 +763,7 @@ Exception Value: {{ exception_value|force_escape }}
 """
 
 TECHNICAL_404_TEMPLATE = """
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -842,7 +835,7 @@ TECHNICAL_404_TEMPLATE = """
 """
 
 EMPTY_URLCONF_TEMPLATE = """
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en"><head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="robots" content="NONE,NOARCHIVE"><title>Welcome to Django</title>

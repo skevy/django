@@ -2,18 +2,15 @@ import re
 
 from django.db.backends import BaseDatabaseOperations
 
-# This DatabaseOperations class lives in here instead of base.py because it's
-# used by both the 'postgresql' and 'postgresql_psycopg2' backends.
 
 class DatabaseOperations(BaseDatabaseOperations):
     def __init__(self, connection):
-        super(DatabaseOperations, self).__init__()
+        super(DatabaseOperations, self).__init__(connection)
         self._postgres_version = None
-        self.connection = connection
 
     def _get_postgres_version(self):
         if self._postgres_version is None:
-            from django.db.backends.postgresql.version import get_version
+            from django.db.backends.postgresql_psycopg2.version import get_version
             cursor = self.connection.cursor()
             self._postgres_version = get_version(cursor)
         return self._postgres_version
@@ -203,3 +200,12 @@ class DatabaseOperations(BaseDatabaseOperations):
         """
 
         return 63
+
+    def last_executed_query(self, cursor, sql, params):
+        # With psycopg2, cursor objects have a "query" attribute that is the
+        # exact query sent to the database. See docs here:
+        # http://www.initd.org/tracker/psycopg/wiki/psycopg2_documentation#postgresql-status-message-and-executed-query
+        return cursor.query
+
+    def return_insert_id(self):
+        return "RETURNING %s", ()
