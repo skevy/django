@@ -669,7 +669,7 @@ sub.is_safe = False
 def mul(value, arg):
     """Adds the arg to the value."""
     try:
-        return int(value) * int(arg)
+        return float(value) * int(arg)
     except (ValueError, TypeError):
         try:
             return value * arg
@@ -680,7 +680,7 @@ mul.is_safe = False
 def div(value, arg):
     """Adds the arg to the value."""
     try:
-        return int(value) / int(arg)
+        return float(value) / int(arg)
     except (ValueError, TypeError):
         try:
             return value / arg
