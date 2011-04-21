@@ -698,6 +698,33 @@ def floor_(value):
             return value
 floor_.is_safe = False
 
+def ceil_(value):
+    try:
+        return math.ceil(float(value))
+    except (ValueError, TypeError):
+        try:
+            return math.ceil(value)
+        except:
+            return value
+ceil_.is_safe = False
+
+def mod(value, arg):
+    try:
+        return int(value) % int(arg)
+    except (ValueError, TypeError):
+        try:
+            return value % arg
+        except:
+            return value
+mod.is_safe = False
+
+def to_int(value):
+    try:
+        return int(value)
+    except:
+        return value
+to_int.is_safe = False
+
 def get_digit(value, arg):
     """
     Given a whole number, returns the requested digit of it, where 1 is the
@@ -835,6 +862,14 @@ yesno.is_safe = False
 # MISC            #
 ###################
 
+def get(value, arg):
+    """Get's an item from an array"""
+    try:
+        return list(value)[arg]
+    except:
+        return None
+get.is_safe = False
+
 def filesizeformat(bytes):
     """
     Formats the value like a 'human-readable' file size (i.e. 13 KB, 4.1 MB,
@@ -923,6 +958,7 @@ pprint.is_safe = True
 register.filter(add)
 register.filter(addslashes)
 register.filter(capfirst)
+register.filter('ceil', ceil_)
 register.filter(center)
 register.filter(cut)
 register.filter(date)
@@ -940,6 +976,7 @@ register.filter(fix_ampersands)
 register.filter(floatformat)
 register.filter('floor', floor_)
 register.filter(force_escape)
+register.filter(get)
 register.filter(get_digit)
 register.filter(iriencode)
 register.filter(join)
@@ -952,6 +989,7 @@ register.filter(linenumbers)
 register.filter(ljust)
 register.filter(lower)
 register.filter(make_list)
+register.filter(mod)
 register.filter(mul)
 register.filter(phone2numeric)
 register.filter(pluralize)
@@ -970,6 +1008,7 @@ register.filter(time)
 register.filter(timesince)
 register.filter(timeuntil)
 register.filter(title)
+register.filter(to_int)
 register.filter(truncatewords)
 register.filter(truncatewords_html)
 register.filter(unordered_list)
